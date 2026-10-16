@@ -6,10 +6,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Tiếng Việt Gấu" />
-  <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3773/3773199.png" />
-  <title>Tiếng Việt Của Gấu</title>
+  <title>Tiếng Việt Của Gấu - v4.0</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>if ('caches' in window) caches.keys().then(keys => keys.forEach(k => caches.delete(k)));</script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap');
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
@@ -43,8 +41,8 @@
     /* Máy ghép chữ */
     .slot-machine { background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%); border: 8px solid #cbd5e1; border-radius: 2rem; box-shadow: inset 0 10px 20px rgba(0,0,0,0.05), 0 10px 25px rgba(0,0,0,0.1); }
     .slot-window { background: #ffffff; border: 4px solid #94a3b8; border-radius: 1.2rem; box-shadow: inset 0 8px 15px rgba(0,0,0,0.1); overflow: hidden; position: relative; }
-    .slot-item { font-size: 4rem; font-weight: 900; line-height: 1; display: flex; align-items: center; justify-content: center; height: 100px; transition: transform 0.2s ease-out; }
-    @media (min-width: 640px) { .slot-item { font-size: 5rem; height: 120px; } }
+    .slot-item { font-size: 3rem; font-weight: 900; line-height: 1; display: flex; align-items: center; justify-content: center; height: 100px; transition: transform 0.2s ease-out; }
+    @media (min-width: 640px) { .slot-item { font-size: 4rem; height: 120px; } }
   </style>
 </head>
 <body class="p-1 sm:p-2">
@@ -52,9 +50,9 @@
   <!-- MÀN HÌNH MỞ KHÓA ÂM THANH -->
   <div id="welcome-view" class="fixed inset-0 z-50 bg-gradient-to-b from-amber-400 to-orange-500 flex flex-col items-center justify-center p-5 text-center text-white">
     <div class="w-32 h-32 rounded-[2rem] bg-white border-4 border-amber-200 flex items-center justify-center text-6xl shadow-2xl mb-4 animate-float">📖</div>
-    <span class="bg-white/20 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider mb-2">Tiếng Việt Của Gấu</span>
-    <h1 class="text-3xl sm:text-5xl font-black mb-2 drop-shadow-md">GÓC ĐỌC SÁCH</h1>
-    <p class="text-sm sm:text-lg font-bold text-orange-100 mb-8">Cùng Gấu học chữ cái và đánh vần nhé!</p>
+    <span class="bg-white/20 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider mb-2">Sách: Kết nối tri thức</span>
+    <h1 class="text-3xl sm:text-5xl font-black mb-2 drop-shadow-md">TIẾNG VIỆT LỚP 1</h1>
+    <p class="text-sm sm:text-lg font-bold text-orange-100 mb-8">Bám sát 100% chương trình học của Gấu</p>
     <button onclick="startAppWithAudio()" class="btn-3d bg-white border-b-[6px] border-slate-200 text-orange-600 font-black text-xl sm:text-2xl px-8 py-4 rounded-2xl shadow-xl flex items-center gap-2">
       <span>▶️ BẮT ĐẦU ĐỌC</span><span>🔊</span>
     </button>
@@ -66,30 +64,27 @@
       <div class="text-6xl animate-float mb-2">🐻</div>
       <h2 class="text-2xl sm:text-4xl font-black text-slate-800 text-center mb-2">Gấu muốn học bài nào?</h2>
       
-      <div class="flex flex-col sm:flex-row w-full max-w-3xl gap-4 px-2">
-        <!-- Nút Bài 1 -->
+      <div class="flex flex-col sm:flex-row w-full max-w-4xl gap-4 px-2">
         <button onclick="switchView('card-view')" class="btn-3d flex-1 bg-gradient-to-br from-pink-400 to-rose-500 border-b-[6px] border-rose-700 rounded-3xl p-5 shadow-lg flex flex-col items-center gap-3">
           <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 rounded-2xl border-2 border-white/40 flex items-center justify-center text-4xl sm:text-5xl">🎴</div>
           <div class="text-white text-center">
-            <div class="text-[10px] sm:text-xs font-black text-pink-200 uppercase">Bài 1</div>
-            <div class="text-lg sm:text-xl font-black">Thẻ Chữ Cái</div>
+            <div class="text-[10px] sm:text-xs font-black text-pink-200 uppercase">Bài 1 đến 28</div>
+            <div class="text-lg sm:text-xl font-black">Bảng Chữ Cái</div>
           </div>
         </button>
 
-        <!-- Nút Bài 2 -->
         <button onclick="switchView('machine-view')" class="btn-3d flex-1 bg-gradient-to-br from-sky-400 to-blue-500 border-b-[6px] border-blue-700 rounded-3xl p-5 shadow-lg flex flex-col items-center gap-3">
           <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 rounded-2xl border-2 border-white/40 flex items-center justify-center text-4xl sm:text-5xl">⚙️</div>
           <div class="text-white text-center">
-            <div class="text-[10px] sm:text-xs font-black text-sky-200 uppercase">Bài 2</div>
+            <div class="text-[10px] sm:text-xs font-black text-sky-200 uppercase">Luyện tập</div>
             <div class="text-lg sm:text-xl font-black">Máy Ghép Vần</div>
           </div>
         </button>
 
-        <!-- Nút Bài 3 -->
         <button onclick="switchView('quiz-view'); loadQuiz();" class="btn-3d flex-1 bg-gradient-to-br from-emerald-400 to-green-500 border-b-[6px] border-green-700 rounded-3xl p-5 shadow-lg flex flex-col items-center gap-3">
           <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 rounded-2xl border-2 border-white/40 flex items-center justify-center text-4xl sm:text-5xl">🧩</div>
           <div class="text-white text-center">
-            <div class="text-[10px] sm:text-xs font-black text-emerald-200 uppercase">Bài 3</div>
+            <div class="text-[10px] sm:text-xs font-black text-emerald-200 uppercase">Bài 29 (Luật c/k, g/gh)</div>
             <div class="text-lg sm:text-xl font-black">Điền Chữ</div>
           </div>
         </button>
@@ -97,7 +92,7 @@
     </div>
   </div>
 
-  <!-- BÀI 1: BẢNG LẬT THẺ CHỮ CÁI -->
+  <!-- BÀI 1: BẢNG LẬT THẺ (FULL SGK) -->
   <div id="card-view" class="app-view animate-pop relative max-w-5xl mx-auto gap-2">
     <header class="bg-white rounded-2xl shadow-sm border-2 border-amber-200 px-3 py-2 shrink-0 flex items-center justify-between gap-2 z-10">
       <button onclick="switchView('dashboard-view')" class="btn-3d bg-slate-100 font-black text-slate-600 px-3 py-1.5 rounded-xl border-b-4 border-slate-300 text-xs sm:text-sm">⬅️ Trở về</button>
@@ -105,7 +100,6 @@
       <button onclick="shuffleCards()" class="btn-3d bg-sky-500 text-white font-black text-xs sm:text-sm px-3 py-1.5 rounded-xl shadow border-b-4 border-sky-700">🔀 Đảo chữ</button>
     </header>
     <main class="flex-1 board-3d p-3 flex flex-col relative overflow-hidden bg-amber-50">
-      <div class="text-center text-amber-700 font-black text-xs sm:text-sm mb-3 shrink-0">💡 Gấu chạm vào thẻ để nghe đọc âm vị và xem hình nhé!</div>
       <div id="card-grid" class="flex-1 overflow-y-auto grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 pb-4 px-1">
         <!-- Render bằng JS -->
       </div>
@@ -120,41 +114,35 @@
     </header>
     <main class="flex-1 board-3d p-2 sm:p-4 flex flex-col relative overflow-y-auto bg-slate-50 justify-center">
       <div class="slot-machine p-3 sm:p-5 flex flex-col gap-4 max-w-lg mx-auto w-full">
-        <!-- KẾT QUẢ -->
         <div class="bg-white rounded-2xl border-4 border-purple-200 p-2 text-center shadow-sm relative overflow-hidden">
           <div class="text-[10px] sm:text-xs font-black text-purple-400 uppercase tracking-widest mb-1">KẾT QUẢ</div>
-          <div id="final-word" class="text-6xl sm:text-8xl font-black text-purple-700 h-20 sm:h-24 flex items-center justify-center animate-pop">bà</div>
+          <div id="final-word" class="text-5xl sm:text-7xl font-black text-purple-700 h-20 sm:h-24 flex items-center justify-center animate-pop">bà</div>
         </div>
-        <!-- 3 CỘT SLOT -->
         <div class="flex justify-between gap-1.5 sm:gap-4">
-          <!-- Phụ Âm -->
           <div class="flex-1 flex flex-col gap-1 sm:gap-2">
             <div class="text-center text-[9px] sm:text-xs font-black text-sky-600 uppercase">Phụ Âm</div>
-            <button onclick="changeSlot('c', -1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 flex items-center justify-center text-slate-500 font-black">▲</button>
+            <button onclick="changeSlot('c', -1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 text-slate-500 font-black">▲</button>
             <div class="slot-window h-[80px] sm:h-[120px]"><div id="slot-c" class="slot-item text-sky-600">b</div></div>
-            <button onclick="changeSlot('c', 1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 flex items-center justify-center text-slate-500 font-black">▼</button>
+            <button onclick="changeSlot('c', 1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 text-slate-500 font-black">▼</button>
           </div>
           <div class="flex flex-col justify-center text-2xl sm:text-5xl font-black text-slate-300 mt-6">+</div>
-          <!-- Nguyên Âm -->
           <div class="flex-1 flex flex-col gap-1 sm:gap-2">
             <div class="text-center text-[9px] sm:text-xs font-black text-rose-500 uppercase">Nguyên Âm</div>
-            <button onclick="changeSlot('v', -1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 flex items-center justify-center text-slate-500 font-black">▲</button>
+            <button onclick="changeSlot('v', -1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 text-slate-500 font-black">▲</button>
             <div class="slot-window h-[80px] sm:h-[120px]"><div id="slot-v" class="slot-item text-rose-600">a</div></div>
-            <button onclick="changeSlot('v', 1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 flex items-center justify-center text-slate-500 font-black">▼</button>
+            <button onclick="changeSlot('v', 1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 text-slate-500 font-black">▼</button>
           </div>
           <div class="flex flex-col justify-center text-2xl sm:text-5xl font-black text-slate-300 mt-6">+</div>
-          <!-- Dấu Thanh -->
           <div class="flex-1 flex flex-col gap-1 sm:gap-2">
             <div class="text-center text-[9px] sm:text-xs font-black text-emerald-600 uppercase">Dấu Thanh</div>
-            <button onclick="changeSlot('t', -1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 flex items-center justify-center text-slate-500 font-black">▲</button>
+            <button onclick="changeSlot('t', -1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 text-slate-500 font-black">▲</button>
             <div class="slot-window h-[80px] sm:h-[120px] bg-slate-50 flex flex-col justify-center">
               <div id="slot-t-visual" class="text-4xl sm:text-6xl text-center text-emerald-600 font-black mb-1">`</div>
               <div id="slot-t-name" class="text-center text-[8px] sm:text-[10px] font-black text-emerald-500 uppercase">Huyền</div>
             </div>
-            <button onclick="changeSlot('t', 1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 flex items-center justify-center text-slate-500 font-black">▼</button>
+            <button onclick="changeSlot('t', 1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 text-slate-500 font-black">▼</button>
           </div>
         </div>
-        <!-- NÚT ĐÁNH VẦN -->
         <button onclick="playResult()" class="btn-3d w-full mt-2 bg-amber-400 border-b-[6px] border-amber-600 text-amber-950 text-xl sm:text-3xl font-black py-3 sm:py-4 rounded-2xl shadow-lg flex items-center justify-center gap-3">
           <span>🪄 ĐÁNH VẦN NÀO</span>
         </button>
@@ -162,31 +150,26 @@
     </main>
   </div>
 
-  <!-- BÀI 3: ĐIỀN CHỮ VÀO CHỖ TRỐNG -->
+  <!-- BÀI 3: ĐIỀN CHỮ VÀO CHỖ TRỐNG (LUẬT CHÍNH TẢ BÀI 29) -->
   <div id="quiz-view" class="app-view animate-pop relative max-w-5xl mx-auto gap-2">
     <header class="bg-white rounded-2xl shadow-sm border-2 border-emerald-200 px-3 py-2 shrink-0 flex items-center justify-between gap-2 z-10">
       <button onclick="switchView('dashboard-view')" class="btn-3d bg-slate-100 font-black text-slate-600 px-3 py-1.5 rounded-xl border-b-4 border-slate-300 text-xs sm:text-sm">⬅️ Trở về</button>
-      <div class="flex-1 text-center font-black text-sm sm:text-lg text-emerald-700">🧩 Thử Tài Điền Chữ</div>
+      <div class="flex-1 text-center font-black text-sm sm:text-lg text-emerald-700">🧩 Luyện Tập Chính Tả</div>
       <button onclick="speakQuizWord()" class="btn-3d bg-sky-500 text-white font-black text-xs sm:text-sm px-3 py-1.5 rounded-xl shadow border-b-4 border-sky-700">🔊 Đọc</button>
     </header>
     <main class="flex-1 board-3d p-4 flex flex-col justify-center items-center relative overflow-hidden bg-emerald-50">
+      <div class="text-[10px] sm:text-xs font-black text-slate-500 uppercase tracking-widest mb-4">SGK Bài 29 - Luật c/k, g/gh, ng/ngh</div>
+      <div class="text-7xl sm:text-9xl mb-6 animate-float" id="quiz-emoji">🐟</div>
       
-      <div class="text-7xl sm:text-9xl mb-6 animate-float" id="quiz-emoji">⚽</div>
-      
-      <!-- Khung hiển thị từ bị khuyết -->
       <div class="flex items-center gap-2 mb-10">
-        <div id="quiz-blank" class="w-16 h-20 sm:w-24 sm:h-28 bg-white border-4 border-dashed border-emerald-400 rounded-2xl flex items-center justify-center text-5xl sm:text-7xl font-black text-emerald-600 shadow-inner">
-          ?
-        </div>
-        <div id="quiz-remainder" class="text-6xl sm:text-8xl font-black text-slate-700 tracking-tight">óng</div>
+        <div id="quiz-blank" class="min-w-[4rem] px-2 h-20 sm:min-w-[6rem] sm:h-28 bg-white border-4 border-dashed border-emerald-400 rounded-2xl flex items-center justify-center text-5xl sm:text-7xl font-black text-emerald-600 shadow-inner">?</div>
+        <div id="quiz-remainder" class="text-5xl sm:text-8xl font-black text-slate-700 tracking-tight">á cờ</div>
       </div>
 
-      <!-- Khu vực chọn chữ cái -->
       <div class="text-sm font-bold text-slate-500 mb-3 uppercase tracking-widest">Chọn chữ đúng</div>
       <div id="quiz-options" class="flex justify-center gap-4 sm:gap-6 w-full max-w-md">
         <!-- Render bằng JS -->
       </div>
-      
     </main>
   </div>
 
@@ -195,25 +178,41 @@
   <script>
     const CHILD_NAME = 'Gấu';
     
-    // Dữ liệu Bảng lật thẻ
+    // FULL DỮ LIỆU BÁM SÁT SGK KẾT NỐI TRI THỨC (BÀI 1 ĐẾN 28)
     const LESSONS = [
-      { char: 'a', phonics: 'a', word: 'Quả táo', emoji: '🍎', type: 'vowel' },
-      { char: 'b', phonics: 'bờ', word: 'Quả bóng', emoji: '⚽', type: 'consonant' },
-      { char: 'c', phonics: 'cờ', word: 'Con cá', emoji: '🐟', type: 'consonant' },
-      { char: 'o', phonics: 'o', word: 'Con ong', emoji: '🐝', type: 'vowel' },
-      { char: 'ô', phonics: 'ô', word: 'Cái ô', emoji: '☂️', type: 'vowel' },
-      { char: 'ơ', phonics: 'ơ', word: 'Cái nơ', emoji: '🎀', type: 'vowel' },
-      { char: 'd', phonics: 'dờ', word: 'Con dê', emoji: '🐐', type: 'consonant' },
-      { char: 'đ', phonics: 'đờ', word: 'Đàn đá', emoji: '🎹', type: 'consonant' },
-      { char: 'e', phonics: 'e', word: 'Em bé', emoji: '👶', type: 'vowel' },
-      { char: 'ê', phonics: 'ê', word: 'Quả lê', emoji: '🍐', type: 'vowel' }
+      { char: 'a', phonics: 'a', word: 'ca hát', emoji: '🎤', type: 'vowel' },
+      { char: 'b', phonics: 'bờ', word: 'ba ba', emoji: '🐢', type: 'consonant' },
+      { char: 'c', phonics: 'cờ', word: 'con cá', emoji: '🐟', type: 'consonant' },
+      { char: 'e', phonics: 'e', word: 'em bé', emoji: '👶', type: 'vowel' },
+      { char: 'ê', phonics: 'ê', word: 'bế bé', emoji: '🤱', type: 'vowel' },
+      { char: 'o', phonics: 'o', word: 'con bò', emoji: '🐄', type: 'vowel' },
+      { char: 'ô', phonics: 'ô', word: 'ô tô', emoji: '🚗', type: 'vowel' },
+      { char: 'ơ', phonics: 'ơ', word: 'cá cờ', emoji: '🐠', type: 'vowel' },
+      { char: 'd', phonics: 'dờ', word: 'đá dế', emoji: '🦗', type: 'consonant' },
+      { char: 'đ', phonics: 'đờ', word: 'đi đò', emoji: '🛶', type: 'consonant' },
+      { char: 'k', phonics: 'ca', word: 'kì đà', emoji: '🦎', type: 'consonant' },
+      { char: 'h', phonics: 'hờ', word: 'bờ hồ', emoji: '🏞️', type: 'consonant' },
+      { char: 'l', phonics: 'lờ', word: 'le le', emoji: '🦆', type: 'consonant' },
+      { char: 'ch', phonics: 'chờ', word: 'chú khỉ', emoji: '🐒', type: 'consonant' },
+      { char: 'kh', phonics: 'khờ', word: 'lá khô', emoji: '🍂', type: 'consonant' },
+      { char: 'm', phonics: 'mờ', word: 'cá mè', emoji: '🐟', type: 'consonant' },
+      { char: 'n', phonics: 'nờ', word: 'nơ đỏ', emoji: '🎀', type: 'consonant' },
+      { char: 'g', phonics: 'gờ', word: 'gà gô', emoji: '🐓', type: 'consonant' },
+      { char: 'gi', phonics: 'di', word: 'giá đỗ', emoji: '🌱', type: 'consonant' },
+      { char: 'gh', phonics: 'gờ', word: 'ghế đá', emoji: '🪑', type: 'consonant' },
+      { char: 'nh', phonics: 'nhờ', word: 'nhà gỗ', emoji: '🏠', type: 'consonant' },
+      { char: 'ng', phonics: 'ngờ', word: 'ngã ba', emoji: '🛣️', type: 'consonant' },
+      { char: 'ngh', phonics: 'ngờ', word: 'củ nghệ', emoji: '🥔', type: 'consonant' },
+      { char: 'ph', phonics: 'phờ', word: 'phố cổ', emoji: '🏘️', type: 'consonant' },
+      { char: 'qu', phonics: 'quờ', word: 'quả khế', emoji: '⭐', type: 'consonant' }
     ];
 
-    // Dữ liệu Cỗ Máy Ghép Vần
+    // DỮ LIỆU CỖ MÁY GHÉP VẦN (Mở rộng thêm âm kép)
     const CONSONANTS = [
-      { char: 'b', sound: 'bờ' }, { char: 'c', sound: 'cờ' }, { char: 'd', sound: 'dờ' },
-      { char: 'đ', sound: 'đờ' }, { char: 'h', sound: 'hờ' }, { char: 'l', sound: 'lờ' },
-      { char: 'm', sound: 'mờ' }, { char: 'n', sound: 'nờ' }, { char: 'v', sound: 'vờ' }
+      { char: 'b', sound: 'bờ' }, { char: 'c', sound: 'cờ' }, { char: 'd', sound: 'dờ' }, { char: 'đ', sound: 'đờ' },
+      { char: 'g', sound: 'gờ' }, { char: 'h', sound: 'hờ' }, { char: 'l', sound: 'lờ' }, { char: 'm', sound: 'mờ' },
+      { char: 'n', sound: 'nờ' }, { char: 'v', sound: 'vờ' }, { char: 'ch', sound: 'chờ' }, { char: 'kh', sound: 'khờ' },
+      { char: 'nh', sound: 'nhờ' }, { char: 'th', sound: 'thờ' }, { char: 'tr', sound: 'trờ' }, { char: 'ph', sound: 'phờ' }
     ];
     const VOWELS = ['a', 'o', 'ô', 'ơ', 'u', 'ư', 'e', 'ê', 'i'];
     const TONES = [
@@ -225,21 +224,21 @@
       { id: 'nang', mark: '\u0323', visual: '•', name: 'Nặng' }
     ];
 
-    // Dữ liệu Bài 3: Điền chữ
+    // BÀI 29 SGK: KIỂM TRA LUẬT CHÍNH TẢ (c/k, g/gh, ng/ngh đi với e, ê, i)
     const QUIZZES = [
-      { word: 'bóng', display: 'óng', missing: 'b', options: ['d', 'b', 'đ'], emoji: '⚽' },
-      { word: 'cá', display: 'á', missing: 'c', options: ['c', 'e', 'o'], emoji: '🐟' },
-      { word: 'dê', display: 'ê', missing: 'd', options: ['đ', 'b', 'd'], emoji: '🐐' },
-      { word: 'đá', display: 'á', missing: 'đ', options: ['d', 'đ', 'b'], emoji: '🧊' },
-      { word: 'lê', display: 'ê', missing: 'l', options: ['n', 'l', 'h'], emoji: '🍐' },
-      { word: 'nơ', display: 'ơ', missing: 'n', options: ['m', 'n', 'l'], emoji: '🎀' },
-      { word: 'cò', display: 'ò', missing: 'c', options: ['o', 'c', 'e'], emoji: '🦩' },
-      { word: 'mũ', display: 'ũ', missing: 'm', options: ['n', 'm', 'h'], emoji: '🧢' }
+      { word: 'cá cờ', display: 'á cờ', missing: 'c', options: ['c', 'k', 'g'], emoji: '🐠' },
+      { word: 'kẻ ô', display: 'ẻ ô', missing: 'k', options: ['k', 'c', 'h'], emoji: '📏' },
+      { word: 'gà gô', display: 'à gô', missing: 'g', options: ['g', 'gh', 'ng'], emoji: '🐓' },
+      { word: 'ghế đá', display: 'ế đá', missing: 'gh', options: ['gh', 'g', 'nh'], emoji: '🪑' },
+      { word: 'ngã ba', display: 'ã ba', missing: 'ng', options: ['ng', 'ngh', 'nh'], emoji: '🛣️' },
+      { word: 'củ nghệ', display: 'ủ nghệ', missing: 'ngh', options: ['ngh', 'ng', 'gh'], emoji: '🥔' },
+      { word: 'đi đò', display: 'i đò', missing: 'đ', options: ['d', 'đ', 'b'], emoji: '🛶' },
+      { word: 'kì đà', display: 'ì đà', missing: 'k', options: ['c', 'k', 'kh'], emoji: '🦎' }
     ];
 
     const state = { view: 'dashboard-view', cIdx: 0, vIdx: 0, tIdx: 1, currentQuiz: null };
     
-    /* --- HỆ THỐNG ÂM THANH --- */
+    /* --- HỆ THỐNG ÂM THANH KÉP --- */
     let audioCtx = null;
     const ttsPlayer = new Audio(); ttsPlayer.referrerPolicy = 'no-referrer';
 
@@ -317,13 +316,14 @@
       data.forEach((item, index) => {
         const div = document.createElement('div'); div.className = 'w-full aspect-[4/5]';
         const frontClass = item.type === 'vowel' ? 'vowel-front' : 'consonant-front';
+        const fontSize = item.char.length > 2 ? 'text-3xl sm:text-5xl' : item.char.length > 1 ? 'text-4xl sm:text-6xl' : 'text-5xl sm:text-7xl';
         div.innerHTML = `
           <div class="flip-card" id="card-${index}" onclick="flipCard(${index}, '${item.phonics}', '${item.word}')">
             <div class="flip-card-inner">
-              <div class="flip-card-front ${frontClass} border-4"><span class="text-5xl sm:text-7xl font-black mb-1">${item.char}</span></div>
+              <div class="flip-card-front ${frontClass} border-4"><span class="${fontSize} font-black mb-1">${item.char}</span></div>
               <div class="flip-card-back border-4">
                 <span class="text-4xl sm:text-6xl mb-1 animate-float">${item.emoji}</span>
-                <span class="text-xs sm:text-sm font-black text-pink-600">${item.word}</span>
+                <span class="text-xs sm:text-sm font-black text-pink-600 truncate px-1">${item.word}</span>
               </div>
             </div>
           </div>
@@ -360,11 +360,22 @@
 
     function getCombinedWord() {
       const c = CONSONANTS[state.cIdx]; const v = VOWELS[state.vIdx]; const t = TONES[state.tIdx];
-      return (c.char + v + t.mark).normalize('NFC');
+      // Một số quy tắc chính tả cơ bản khi ghép
+      let finalVowel = v; let finalConsonant = c.char;
+      if(finalConsonant === 'k' && !['e','ê','i'].includes(v)) finalConsonant = 'c';
+      if(finalConsonant === 'gh' && !['e','ê','i'].includes(v)) finalConsonant = 'g';
+      if(finalConsonant === 'ngh' && !['e','ê','i'].includes(v)) finalConsonant = 'ng';
+      return (finalConsonant + finalVowel + t.mark).normalize('NFC');
     }
 
     function updateSlotUI() {
-      document.getElementById('slot-c').textContent = CONSONANTS[state.cIdx].char;
+      const c = CONSONANTS[state.cIdx];
+      const fontC = c.char.length > 2 ? 'text-4xl sm:text-5xl' : c.char.length > 1 ? 'text-5xl sm:text-6xl' : 'text-6xl sm:text-7xl';
+      
+      const elC = document.getElementById('slot-c');
+      elC.textContent = c.char;
+      elC.className = `slot-item text-sky-600 ${fontC}`;
+
       document.getElementById('slot-v').textContent = VOWELS[state.vIdx];
       document.getElementById('slot-t-visual').textContent = TONES[state.tIdx].visual;
       document.getElementById('slot-t-name').textContent = TONES[state.tIdx].name;
@@ -399,7 +410,7 @@
       });
     }
 
-    /* --- BÀI 3: TRÒ CHƠI ĐIỀN CHỮ --- */
+    /* --- BÀI 3: TRÒ CHƠI ĐIỀN CHỮ CHÍNH TẢ --- */
     function loadQuiz() {
       const q = QUIZZES[Math.floor(Math.random() * QUIZZES.length)];
       state.currentQuiz = q;
@@ -408,7 +419,7 @@
       document.getElementById('quiz-remainder').textContent = q.display;
       
       const blank = document.getElementById('quiz-blank');
-      blank.className = 'w-16 h-20 sm:w-24 sm:h-28 bg-white border-4 border-dashed border-emerald-400 rounded-2xl flex items-center justify-center text-5xl sm:text-7xl font-black text-emerald-600 shadow-inner transition-all';
+      blank.className = 'min-w-[4rem] px-2 h-20 sm:min-w-[6rem] sm:h-28 bg-white border-4 border-dashed border-emerald-400 rounded-2xl flex items-center justify-center text-5xl sm:text-7xl font-black text-emerald-600 shadow-inner transition-all';
       blank.textContent = '?';
 
       const optionsBox = document.getElementById('quiz-options');
@@ -416,7 +427,8 @@
       
       q.options.forEach(opt => {
         const btn = document.createElement('button');
-        btn.className = 'btn-3d flex-1 bg-white border-4 border-slate-200 border-b-[6px] text-slate-700 text-5xl sm:text-6xl font-black py-4 rounded-2xl shadow hover:bg-slate-50';
+        const fontOpt = opt.length > 2 ? 'text-3xl sm:text-4xl' : opt.length > 1 ? 'text-4xl sm:text-5xl' : 'text-5xl sm:text-6xl';
+        btn.className = `btn-3d flex-1 bg-white border-4 border-slate-200 border-b-[6px] text-slate-700 ${fontOpt} font-black py-4 rounded-2xl shadow hover:bg-slate-50`;
         btn.textContent = opt;
         btn.onclick = () => checkQuizAnswer(opt);
         optionsBox.appendChild(btn);
@@ -435,15 +447,15 @@
         triggerConfetti();
         
         const blank = document.getElementById('quiz-blank');
-        blank.className = 'w-16 h-20 sm:w-24 sm:h-28 bg-emerald-500 border-4 border-emerald-600 rounded-2xl flex items-center justify-center text-5xl sm:text-7xl font-black text-white shadow-lg animate-pop';
+        blank.className = 'min-w-[4rem] px-2 h-20 sm:min-w-[6rem] sm:h-28 bg-emerald-500 border-4 border-emerald-600 rounded-2xl flex items-center justify-center text-4xl sm:text-6xl font-black text-white shadow-lg animate-pop';
         blank.textContent = selectedLetter;
         
         speakVietnamese(`Đúng rồi! ${state.currentQuiz.word}`);
         
-        setTimeout(() => loadQuiz(), 2500);
+        setTimeout(() => loadQuiz(), 3000);
       } else {
         playSound('wrong');
-        speakVietnamese(`Chưa đúng rồi, Gấu thử lại chữ khác nhé!`);
+        speakVietnamese(`Chưa đúng rồi, Gấu nhớ lại luật chính tả e, ê, i nhé!`);
       }
     }
 
