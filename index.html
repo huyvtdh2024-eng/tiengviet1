@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="Tiếng Việt 1" />
+  <meta name="apple-mobile-web-app-title" content="Tiếng Việt Gấu" />
   <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3773/3773199.png" />
-  <title>Tiếng Việt Lớp 1 </title>
+  <title>Tiếng Việt Của Gấu</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>if ('caches' in window) caches.keys().then(keys => keys.forEach(k => caches.delete(k)));</script>
   <style>
@@ -31,7 +31,7 @@
     .app-view { display: none; width: 100%; height: 100%; flex-direction: column; }
     .app-view.active { display: flex; }
 
-    /* Hiệu ứng lật thẻ 3D (Flip Card) */
+    /* Hiệu ứng lật thẻ 3D */
     .flip-card { perspective: 1000px; width: 100%; height: 100%; cursor: pointer; }
     .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; }
     .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
@@ -52,9 +52,9 @@
   <!-- MÀN HÌNH MỞ KHÓA ÂM THANH -->
   <div id="welcome-view" class="fixed inset-0 z-50 bg-gradient-to-b from-amber-400 to-orange-500 flex flex-col items-center justify-center p-5 text-center text-white">
     <div class="w-32 h-32 rounded-[2rem] bg-white border-4 border-amber-200 flex items-center justify-center text-6xl shadow-2xl mb-4 animate-float">📖</div>
-    <span class="bg-white/20 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider mb-2">Tiếng Việt 1 • Bản Tích Hợp v3.0</span>
+    <span class="bg-white/20 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider mb-2">Tiếng Việt Của Gấu</span>
     <h1 class="text-3xl sm:text-5xl font-black mb-2 drop-shadow-md">GÓC ĐỌC SÁCH</h1>
-    <p class="text-sm sm:text-lg font-bold text-orange-100 mb-8">Bố mẹ đã sửa lại để Gấu bấm thẻ có tiếng rồi nhé!</p>
+    <p class="text-sm sm:text-lg font-bold text-orange-100 mb-8">Cùng Gấu học chữ cái và đánh vần nhé!</p>
     <button onclick="startAppWithAudio()" class="btn-3d bg-white border-b-[6px] border-slate-200 text-orange-600 font-black text-xl sm:text-2xl px-8 py-4 rounded-2xl shadow-xl flex items-center gap-2">
       <span>▶️ BẮT ĐẦU ĐỌC</span><span>🔊</span>
     </button>
@@ -63,25 +63,34 @@
   <!-- MENU CHÍNH (DASHBOARD) -->
   <div id="dashboard-view" class="app-view animate-pop relative max-w-5xl mx-auto py-4">
     <div class="board-3d flex-1 p-4 flex flex-col items-center justify-center gap-6">
-      <div class="text-6xl animate-float mb-4">🐻</div>
-      <h2 class="text-2xl sm:text-4xl font-black text-slate-800 text-center mb-4">Gấu muốn học bài nào?</h2>
+      <div class="text-6xl animate-float mb-2">🐻</div>
+      <h2 class="text-2xl sm:text-4xl font-black text-slate-800 text-center mb-2">Gấu muốn học bài nào?</h2>
       
-      <div class="flex flex-col sm:flex-row w-full max-w-2xl gap-4 px-4">
+      <div class="flex flex-col sm:flex-row w-full max-w-3xl gap-4 px-2">
         <!-- Nút Bài 1 -->
-        <button onclick="switchView('card-view')" class="btn-3d flex-1 bg-gradient-to-br from-pink-400 to-rose-500 border-b-[6px] border-rose-700 rounded-3xl p-6 shadow-lg flex flex-col items-center gap-3">
-          <div class="w-20 h-20 bg-white/20 rounded-2xl border-2 border-white/40 flex items-center justify-center text-5xl">🎴</div>
+        <button onclick="switchView('card-view')" class="btn-3d flex-1 bg-gradient-to-br from-pink-400 to-rose-500 border-b-[6px] border-rose-700 rounded-3xl p-5 shadow-lg flex flex-col items-center gap-3">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 rounded-2xl border-2 border-white/40 flex items-center justify-center text-4xl sm:text-5xl">🎴</div>
           <div class="text-white text-center">
-            <div class="text-xs font-black text-pink-200 uppercase">Bài 1</div>
-            <div class="text-xl sm:text-2xl font-black">Thẻ Chữ Cái</div>
+            <div class="text-[10px] sm:text-xs font-black text-pink-200 uppercase">Bài 1</div>
+            <div class="text-lg sm:text-xl font-black">Thẻ Chữ Cái</div>
           </div>
         </button>
 
         <!-- Nút Bài 2 -->
-        <button onclick="switchView('machine-view')" class="btn-3d flex-1 bg-gradient-to-br from-sky-400 to-blue-500 border-b-[6px] border-blue-700 rounded-3xl p-6 shadow-lg flex flex-col items-center gap-3">
-          <div class="w-20 h-20 bg-white/20 rounded-2xl border-2 border-white/40 flex items-center justify-center text-5xl">⚙️</div>
+        <button onclick="switchView('machine-view')" class="btn-3d flex-1 bg-gradient-to-br from-sky-400 to-blue-500 border-b-[6px] border-blue-700 rounded-3xl p-5 shadow-lg flex flex-col items-center gap-3">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 rounded-2xl border-2 border-white/40 flex items-center justify-center text-4xl sm:text-5xl">⚙️</div>
           <div class="text-white text-center">
-            <div class="text-xs font-black text-sky-200 uppercase">Bài 2</div>
-            <div class="text-xl sm:text-2xl font-black">Cỗ Máy Ghép Vần</div>
+            <div class="text-[10px] sm:text-xs font-black text-sky-200 uppercase">Bài 2</div>
+            <div class="text-lg sm:text-xl font-black">Máy Ghép Vần</div>
+          </div>
+        </button>
+
+        <!-- Nút Bài 3 -->
+        <button onclick="switchView('quiz-view'); loadQuiz();" class="btn-3d flex-1 bg-gradient-to-br from-emerald-400 to-green-500 border-b-[6px] border-green-700 rounded-3xl p-5 shadow-lg flex flex-col items-center gap-3">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 rounded-2xl border-2 border-white/40 flex items-center justify-center text-4xl sm:text-5xl">🧩</div>
+          <div class="text-white text-center">
+            <div class="text-[10px] sm:text-xs font-black text-emerald-200 uppercase">Bài 3</div>
+            <div class="text-lg sm:text-xl font-black">Điền Chữ</div>
           </div>
         </button>
       </div>
@@ -153,6 +162,36 @@
     </main>
   </div>
 
+  <!-- BÀI 3: ĐIỀN CHỮ VÀO CHỖ TRỐNG -->
+  <div id="quiz-view" class="app-view animate-pop relative max-w-5xl mx-auto gap-2">
+    <header class="bg-white rounded-2xl shadow-sm border-2 border-emerald-200 px-3 py-2 shrink-0 flex items-center justify-between gap-2 z-10">
+      <button onclick="switchView('dashboard-view')" class="btn-3d bg-slate-100 font-black text-slate-600 px-3 py-1.5 rounded-xl border-b-4 border-slate-300 text-xs sm:text-sm">⬅️ Trở về</button>
+      <div class="flex-1 text-center font-black text-sm sm:text-lg text-emerald-700">🧩 Thử Tài Điền Chữ</div>
+      <button onclick="speakQuizWord()" class="btn-3d bg-sky-500 text-white font-black text-xs sm:text-sm px-3 py-1.5 rounded-xl shadow border-b-4 border-sky-700">🔊 Đọc</button>
+    </header>
+    <main class="flex-1 board-3d p-4 flex flex-col justify-center items-center relative overflow-hidden bg-emerald-50">
+      
+      <div class="text-7xl sm:text-9xl mb-6 animate-float" id="quiz-emoji">⚽</div>
+      
+      <!-- Khung hiển thị từ bị khuyết -->
+      <div class="flex items-center gap-2 mb-10">
+        <div id="quiz-blank" class="w-16 h-20 sm:w-24 sm:h-28 bg-white border-4 border-dashed border-emerald-400 rounded-2xl flex items-center justify-center text-5xl sm:text-7xl font-black text-emerald-600 shadow-inner">
+          ?
+        </div>
+        <div id="quiz-remainder" class="text-6xl sm:text-8xl font-black text-slate-700 tracking-tight">óng</div>
+      </div>
+
+      <!-- Khu vực chọn chữ cái -->
+      <div class="text-sm font-bold text-slate-500 mb-3 uppercase tracking-widest">Chọn chữ đúng</div>
+      <div id="quiz-options" class="flex justify-center gap-4 sm:gap-6 w-full max-w-md">
+        <!-- Render bằng JS -->
+      </div>
+      
+    </main>
+  </div>
+
+  <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
   <script>
     const CHILD_NAME = 'Gấu';
     
@@ -186,35 +225,53 @@
       { id: 'nang', mark: '\u0323', visual: '•', name: 'Nặng' }
     ];
 
-    const state = { view: 'dashboard-view', cIdx: 0, vIdx: 0, tIdx: 1 };
+    // Dữ liệu Bài 3: Điền chữ
+    const QUIZZES = [
+      { word: 'bóng', display: 'óng', missing: 'b', options: ['d', 'b', 'đ'], emoji: '⚽' },
+      { word: 'cá', display: 'á', missing: 'c', options: ['c', 'e', 'o'], emoji: '🐟' },
+      { word: 'dê', display: 'ê', missing: 'd', options: ['đ', 'b', 'd'], emoji: '🐐' },
+      { word: 'đá', display: 'á', missing: 'đ', options: ['d', 'đ', 'b'], emoji: '🧊' },
+      { word: 'lê', display: 'ê', missing: 'l', options: ['n', 'l', 'h'], emoji: '🍐' },
+      { word: 'nơ', display: 'ơ', missing: 'n', options: ['m', 'n', 'l'], emoji: '🎀' },
+      { word: 'cò', display: 'ò', missing: 'c', options: ['o', 'c', 'e'], emoji: '🦩' },
+      { word: 'mũ', display: 'ũ', missing: 'm', options: ['n', 'm', 'h'], emoji: '🧢' }
+    ];
+
+    const state = { view: 'dashboard-view', cIdx: 0, vIdx: 0, tIdx: 1, currentQuiz: null };
     
-    /* -----------------------------------------------------
-       1. HỆ THỐNG ÂM THANH KÉP (VÁ LỖI CÂM TRÊN iOS)
-       ----------------------------------------------------- */
+    /* --- HỆ THỐNG ÂM THANH --- */
     let audioCtx = null;
     const ttsPlayer = new Audio(); ttsPlayer.referrerPolicy = 'no-referrer';
 
     function initAudio() {
-      // Ép iOS chạy Audio kể cả khi gạt im lặng
       if (navigator.audioSession) { try { navigator.audioSession.type = 'playback'; } catch(e){} }
       if (!audioCtx) audioCtx = new window.AudioContext();
       if (audioCtx.state === 'suspended') audioCtx.resume();
     }
 
     function forceWakeUpTTS() {
-      // Đánh thức chip TTS của iOS bằng một âm vô thanh
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const silent = new SpeechSynthesisUtterance(' '); silent.volume = 0; window.speechSynthesis.speak(silent);
       }
     }
 
-    function playPop() {
+    function playSound(type) {
       initAudio(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
       osc.connect(gain); gain.connect(audioCtx.destination);
-      osc.type = 'sine'; osc.frequency.setValueAtTime(500, audioCtx.currentTime);
-      gain.gain.setValueAtTime(0.2, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
-      osc.start(); osc.stop(audioCtx.currentTime + 0.15);
+      if (type === 'pop') {
+        osc.type = 'sine'; osc.frequency.setValueAtTime(500, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+        osc.start(); osc.stop(audioCtx.currentTime + 0.15);
+      } else if (type === 'success') {
+        osc.type = 'triangle'; osc.frequency.setValueAtTime(659.25, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+        osc.start(); osc.stop(audioCtx.currentTime + 0.4);
+      } else if (type === 'wrong') {
+        osc.type = 'sawtooth'; osc.frequency.setValueAtTime(200, audioCtx.currentTime); osc.frequency.linearRampToValueAtTime(150, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+        osc.start(); osc.stop(audioCtx.currentTime + 0.2);
+      }
     }
 
     function speakVietnamese(text) {
@@ -223,7 +280,6 @@
       const url = `https://translate.googleapis.com/translate_tts?client=gtx&ie=UTF-8&tl=vi&q=${encodeURIComponent(text)}`;
       ttsPlayer.pause(); ttsPlayer.src = url;
       ttsPlayer.play().catch(() => {
-        // Fallback về iOS TTS nội bộ
         if ('speechSynthesis' in window) {
           window.speechSynthesis.cancel();
           const utter = new SpeechSynthesisUtterance(text); utter.lang = 'vi-VN'; utter.rate = 0.85; window.speechSynthesis.speak(utter);
@@ -231,31 +287,27 @@
       });
     }
 
-    /* -----------------------------------------------------
-       2. ĐIỀU HƯỚNG VÀ LUỒNG APP
-       ----------------------------------------------------- */
+    /* --- ĐIỀU HƯỚNG --- */
     function startAppWithAudio() {
-      initAudio(); forceWakeUpTTS(); playPop();
+      initAudio(); forceWakeUpTTS(); playSound('success');
       document.getElementById('welcome-view').classList.add('hidden');
       switchView('dashboard-view');
-      setTimeout(() => speakVietnamese(`Chào ${CHILD_NAME}! Gấu muốn học bài nào?`), 400);
+      setTimeout(() => speakVietnamese(`Chào ${CHILD_NAME}! Mình cùng học chữ cái nhé!`), 400);
       renderCards(LESSONS);
       updateSlotUI();
     }
 
     function switchView(viewId) {
-      playPop();
+      playSound('pop');
       document.querySelectorAll('.app-view').forEach(el => {
         if (el.id === viewId) { el.classList.remove('hidden'); el.classList.add('flex'); }
         else { el.classList.add('hidden'); el.classList.remove('flex'); }
       });
     }
 
-    /* -----------------------------------------------------
-       3. BÀI 1: BẢNG LẬT THẺ
-       ----------------------------------------------------- */
+    /* --- BÀI 1: BẢNG LẬT THẺ --- */
     function shuffleCards() {
-      playPop();
+      playSound('pop');
       const shuffled = [...LESSONS].sort(() => Math.random() - 0.5);
       renderCards(shuffled);
     }
@@ -281,7 +333,7 @@
     }
 
     window.flipCard = function(index, phonics, word) {
-      playPop();
+      playSound('pop');
       const card = document.getElementById(`card-${index}`);
       const isFlipped = card.classList.contains('flipped');
       document.querySelectorAll('.flip-card').forEach(c => { if (c.id !== `card-${index}`) c.classList.remove('flipped'); });
@@ -291,11 +343,9 @@
       } else { card.classList.remove('flipped'); }
     }
 
-    /* -----------------------------------------------------
-       4. BÀI 2: CỖ MÁY GHÉP VẦN
-       ----------------------------------------------------- */
+    /* --- BÀI 2: CỖ MÁY GHÉP VẦN --- */
     function changeSlot(type, dir) {
-      playPop();
+      playSound('pop');
       if (type === 'c') { state.cIdx = (state.cIdx + dir + CONSONANTS.length) % CONSONANTS.length; animSlot('slot-c'); }
       else if (type === 'v') { state.vIdx = (state.vIdx + dir + VOWELS.length) % VOWELS.length; animSlot('slot-v'); }
       else if (type === 't') { state.tIdx = (state.tIdx + dir + TONES.length) % TONES.length; animSlot('slot-t-visual'); }
@@ -310,7 +360,6 @@
 
     function getCombinedWord() {
       const c = CONSONANTS[state.cIdx]; const v = VOWELS[state.vIdx]; const t = TONES[state.tIdx];
-      // Dùng tổ hợp (Phụ âm + Nguyên âm + Dấu thanh) và chuẩn hóa Unicode để dấu đặt đúng vị trí (ví dụ: b + a + huyền -> bà)
       return (c.char + v + t.mark).normalize('NFC');
     }
 
@@ -331,24 +380,77 @@
       const baseWord = (c.char + v).normalize('NFC');
       const finalWord = getCombinedWord();
 
-      // Xây dựng chuỗi đọc ngắt quãng chậm rãi
       let spellString = t.id === 'ngang' ? `${c.sound}, ${v}, ${baseWord}` : `${c.sound}, ${v}, ${baseWord}, dấu ${t.name.toLowerCase()}, ${finalWord}`;
 
       window.speechSynthesis.cancel();
       const url = `https://translate.googleapis.com/translate_tts?client=gtx&ie=UTF-8&tl=vi&q=${encodeURIComponent(spellString)}`;
       ttsPlayer.pause(); ttsPlayer.src = url;
       
-      const btn = document.querySelector('button[onclick="playResult()"]');
-      btn.classList.add('scale-105', 'bg-amber-300');
+      const btn = document.querySelector('#machine-view button[onclick="playResult()"]');
+      if(btn) btn.classList.add('scale-105', 'bg-amber-300');
       
-      ttsPlayer.play().then(() => { ttsPlayer.onended = () => btn.classList.remove('scale-105', 'bg-amber-300'); })
+      ttsPlayer.play().then(() => { ttsPlayer.onended = () => { if(btn) btn.classList.remove('scale-105', 'bg-amber-300'); } })
       .catch(() => {
         if ('speechSynthesis' in window) {
           const utter = new SpeechSynthesisUtterance(spellString); utter.lang = 'vi-VN'; utter.rate = 0.8;
-          utter.onend = () => btn.classList.remove('scale-105', 'bg-amber-300');
+          utter.onend = () => { if(btn) btn.classList.remove('scale-105', 'bg-amber-300'); };
           window.speechSynthesis.speak(utter);
         }
       });
+    }
+
+    /* --- BÀI 3: TRÒ CHƠI ĐIỀN CHỮ --- */
+    function loadQuiz() {
+      const q = QUIZZES[Math.floor(Math.random() * QUIZZES.length)];
+      state.currentQuiz = q;
+      
+      document.getElementById('quiz-emoji').textContent = q.emoji;
+      document.getElementById('quiz-remainder').textContent = q.display;
+      
+      const blank = document.getElementById('quiz-blank');
+      blank.className = 'w-16 h-20 sm:w-24 sm:h-28 bg-white border-4 border-dashed border-emerald-400 rounded-2xl flex items-center justify-center text-5xl sm:text-7xl font-black text-emerald-600 shadow-inner transition-all';
+      blank.textContent = '?';
+
+      const optionsBox = document.getElementById('quiz-options');
+      optionsBox.innerHTML = '';
+      
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'btn-3d flex-1 bg-white border-4 border-slate-200 border-b-[6px] text-slate-700 text-5xl sm:text-6xl font-black py-4 rounded-2xl shadow hover:bg-slate-50';
+        btn.textContent = opt;
+        btn.onclick = () => checkQuizAnswer(opt);
+        optionsBox.appendChild(btn);
+      });
+
+      setTimeout(() => speakQuizWord(), 500);
+    }
+
+    function speakQuizWord() {
+      if (state.currentQuiz) speakVietnamese(state.currentQuiz.word);
+    }
+
+    window.checkQuizAnswer = function(selectedLetter) {
+      if (selectedLetter === state.currentQuiz.missing) {
+        playSound('success');
+        triggerConfetti();
+        
+        const blank = document.getElementById('quiz-blank');
+        blank.className = 'w-16 h-20 sm:w-24 sm:h-28 bg-emerald-500 border-4 border-emerald-600 rounded-2xl flex items-center justify-center text-5xl sm:text-7xl font-black text-white shadow-lg animate-pop';
+        blank.textContent = selectedLetter;
+        
+        speakVietnamese(`Đúng rồi! ${state.currentQuiz.word}`);
+        
+        setTimeout(() => loadQuiz(), 2500);
+      } else {
+        playSound('wrong');
+        speakVietnamese(`Chưa đúng rồi, Gấu thử lại chữ khác nhé!`);
+      }
+    }
+
+    function triggerConfetti() {
+      const cvs = document.getElementById('confetti-canvas'); const ctx = cvs.getContext('2d'); cvs.width = window.innerWidth; cvs.height = window.innerHeight;
+      const p = Array.from({length:40}, ()=>({x:cvs.width/2, y:cvs.height/2, vx:(Math.random()-0.5)*15, vy:(Math.random()-0.8)*15, s:Math.random()*8+6, c:['#ec4899','#f59e0b','#8b5cf6','#10b981','#3b82f6'][Math.floor(Math.random()*5)]}));
+      let f = 0; function anim() { ctx.clearRect(0,0,cvs.width,cvs.height); p.forEach(i=>{i.x+=i.vx;i.y+=i.vy;i.vy+=0.5;ctx.fillStyle=i.c;ctx.fillRect(i.x,i.y,i.s,i.s)}); if(++f<35) requestAnimationFrame(anim); else ctx.clearRect(0,0,cvs.width,cvs.height); } anim();
     }
   </script>
 </body>
