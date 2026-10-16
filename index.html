@@ -218,7 +218,7 @@
     }
 
     // ĐIỀU CHỈNH TỐC ĐỘ ĐỌC NATIVE CHO iOS CHẬM LẠI
-    function speakVietnamese(text, rate = 0.6) {
+    function speakVietnamese(text, rate = 0.3) {
       if (!text) return;
       initAudio();
       if ('speechSynthesis' in window) {
