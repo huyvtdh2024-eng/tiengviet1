@@ -1,0 +1,18 @@
+﻿{
+  "name": "Tiếng Việt Lớp 1 - Của Gấu",
+  "short_name": "Tiếng Việt",
+  "description": "App Học Tiếng Việt Lớp 1 Tập 1",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#fffbe8",
+  "theme_color": "#f59e0b",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3773/3773199.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
