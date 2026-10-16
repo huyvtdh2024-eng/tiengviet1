@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Tiếng Việt Gấu" />
   <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3773/3773199.png" />
-  <title>Tiếng Việt Của Gấu Yêu </title>
+  <title>Tiếng Việt Của Gấu</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap');
@@ -27,9 +27,6 @@
     .animate-float { animation: floatBaby 3s ease-in-out infinite; }
     @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 80% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
     .animate-pop { animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
-
-    .app-view { display: none; width: 100%; height: 100%; flex-direction: column; }
-    .app-view.active { display: flex; }
 
     /* Lật thẻ */
     .flip-card { perspective: 1000px; width: 100%; height: 100%; cursor: pointer; }
@@ -53,7 +50,7 @@
     <div class="w-32 h-32 rounded-[2rem] bg-white border-4 border-amber-200 flex items-center justify-center text-6xl shadow-2xl mb-4 animate-float">📖</div>
     <span class="bg-white/20 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider mb-2">SGK Kết Nối Tri Thức</span>
     <h1 class="text-3xl sm:text-5xl font-black mb-2 drop-shadow-md">TIẾNG VIỆT LỚP 1</h1>
-    <p class="text-sm sm:text-lg font-bold text-orange-100 mb-8">Đã giảm tốc độ đọc và phóng to chữ cho Gấu!</p>
+    <p class="text-sm sm:text-lg font-bold text-orange-100 mb-8">Đã vá lỗi và giảm tốc độ đọc cho Gấu!</p>
     <button onclick="startAppWithAudio()" class="btn-3d bg-white border-b-[6px] border-slate-200 text-orange-600 font-black text-xl sm:text-2xl px-8 py-4 rounded-2xl shadow-xl flex items-center gap-2">
       <span>▶️ VÀO LỚP HỌC</span><span>🔊</span>
     </button>
@@ -150,7 +147,7 @@
     const CHILD_NAME = 'Gấu';
     let stars = parseInt(localStorage.getItem('tv1_stars') || '0', 10);
     
-    // --- DATABASE ---
+    // --- DATABASE BÁM SÁT SGK ---
     const SYLLABUS = [
       {
         zoneId: 1, zoneName: "Chặng 1: Âm đơn & Dấu (Bài 1-15)", theme: { bg: "bg-emerald-50", border: "border-emerald-400", text: "text-emerald-800", btn: "bg-emerald-100" },
@@ -202,7 +199,7 @@
 
     const state = { currentLesson: null, currentMode: null, mCIdx: 0, mVIdx: 0, mTIdx: 1, testData: { total: 5, current: 0, correct: 0 } };
 
-    // --- AUDIO SYSTEM TỐI ƯU ---
+    // --- AUDIO SYSTEM ---
     let audioCtx = null;
     function initAudio() {
       if (navigator.audioSession) { try { navigator.audioSession.type = 'playback'; } catch(e){} }
@@ -228,7 +225,7 @@
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(text);
         utter.lang = 'vi-VN';
-        utter.rate = rate; // TỐC ĐỘ ĐƯỢC CHỈNH Ở ĐÂY (0.6 là chậm vừa phải)
+        utter.rate = rate; // Giữ nguyên tốc độ đọc chậm 0.6
         window.speechSynthesis.speak(utter);
       }
     }
@@ -248,9 +245,12 @@
 
     function switchView(viewId) {
       playSound('pop');
-      document.querySelectorAll('.app-view').forEach(el => {
-        if (el.id === viewId) { el.classList.remove('hidden'); el.classList.add('flex'); }
-        else { el.classList.add('hidden'); el.classList.remove('flex'); }
+      ['dashboard-view', 'map-view', 'game-view'].forEach(id => {
+        const el = document.getElementById(id);
+        if(el) {
+          if (id === viewId) { el.classList.remove('hidden'); el.classList.add('flex'); }
+          else { el.classList.add('hidden'); el.classList.remove('flex'); }
+        }
       });
       if(viewId === 'map-view') buildMap();
     }
@@ -299,7 +299,6 @@
       
       state.currentLesson.chars.forEach((item, idx) => {
         const frontClass = item.t === 'vowel' ? 'vowel-front' : 'consonant-front';
-        // KÍCH THƯỚC CHỮ TĂNG LÊN KHỔNG LỒ Ở ĐÂY
         const fontSize = item.c.length > 2 ? 'text-5xl sm:text-6xl' : item.c.length > 1 ? 'text-7xl sm:text-[6rem]' : 'text-[6rem] sm:text-[10rem] leading-none';
         
         gridHTML += `
@@ -324,7 +323,7 @@
       const card = document.getElementById(`card-${index}`);
       const isFlipped = card.classList.contains('flipped');
       document.querySelectorAll('.flip-card').forEach(c => c.classList.remove('flipped'));
-      if (!isFlipped) { card.classList.add('flipped'); speakVietnamese(`${phonics}. ${word}`, 0.6); } // Đọc chậm 0.6
+      if (!isFlipped) { card.classList.add('flipped'); speakVietnamese(`${phonics}. ${word}`, 0.6); }
     }
 
     // 2. MÁY GHÉP VẦN
@@ -340,7 +339,7 @@
       stage.innerHTML = `
         <div class="bg-gradient-to-b from-slate-100 to-slate-200 border-4 border-slate-300 rounded-3xl p-3 sm:p-5 flex flex-col gap-4 max-w-lg mx-auto w-full shadow-inner">
           <div class="bg-white rounded-2xl border-4 border-purple-200 p-2 text-center shadow-sm relative overflow-hidden">
-            <div class="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-1">KẾT QUẢ</div>
+            <div class="text-[10px] sm:text-xs font-black text-purple-400 uppercase tracking-widest mb-1">KẾT QUẢ</div>
             <div id="final-word" class="text-6xl sm:text-7xl font-black text-purple-700 h-20 flex items-center justify-center animate-pop">bà</div>
           </div>
           <div class="flex justify-between gap-1.5 sm:gap-4">
@@ -365,7 +364,7 @@
               <button onclick="changeSlot('t', 1)" class="btn-3d bg-white border-2 border-slate-300 rounded-xl h-10 text-slate-500 font-black shadow-sm">▼</button>
             </div>
           </div>
-          <button onclick="playMachineResult()" class="btn-3d w-full mt-2 bg-amber-400 border-b-[6px] border-amber-600 text-amber-950 text-2xl font-black py-4 rounded-2xl shadow-lg">🪄 ĐÁNH VẦN NÀO</button>
+          <button onclick="playMachineResult()" class="btn-3d w-full mt-2 bg-amber-400 border-b-[6px] border-amber-600 text-amber-950 text-xl sm:text-2xl font-black py-3 sm:py-4 rounded-2xl shadow-lg">🪄 ĐÁNH VẦN</button>
         </div>
       `;
       updateSlotUI();
@@ -404,10 +403,9 @@
       const btn = document.querySelector('#machine-view button[onclick="playMachineResult()"]');
       if(btn) btn.classList.add('scale-105', 'bg-amber-300');
       
-      // ĐỌC CHẬM RÃI KHI ĐÁNH VẦN (0.5)
       window.speechSynthesis.cancel();
       if ('speechSynthesis' in window) {
-        const utter = new SpeechSynthesisUtterance(spellString); utter.lang = 'vi-VN'; utter.rate = 0.5;
+        const utter = new SpeechSynthesisUtterance(spellString); utter.lang = 'vi-VN'; utter.rate = 0.5; // Chậm khi đánh vần
         utter.onend = () => { if(btn) btn.classList.remove('scale-105', 'bg-amber-300'); };
         window.speechSynthesis.speak(utter);
       }
@@ -430,7 +428,7 @@
           ${q.options.map(opt => `<button onclick="checkQuizAnswer('${opt}')" class="btn-3d flex-1 bg-white border-4 border-slate-200 border-b-[6px] text-slate-700 text-3xl sm:text-5xl font-black py-3 sm:py-4 rounded-2xl shadow hover:bg-slate-50">${opt}</button>`).join('')}
         </div>
       `;
-      setTimeout(() => speakVietnamese(q.word, 0.65), 500); // Đọc từ bình thường ở chế độ này
+      setTimeout(() => speakVietnamese(q.word, 0.65), 500); 
     }
 
     window.checkQuizAnswer = function(selectedLetter) {
@@ -447,7 +445,7 @@
           else showTestResult();
         }, 2000);
       } else {
-        playSound('wrong'); speakVietnamese(`Sai rồi!`, 0.65);
+        playSound('wrong'); speakVietnamese(`Sai rồi, Gấu nhớ lại luật chính tả e, ê, i nhé!`, 0.65);
         setTimeout(() => {
           state.testData.current++;
           if (state.testData.current < state.testData.total) renderTestMode(document.getElementById('game-stage'));
