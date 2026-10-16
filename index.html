@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="Tiếng Việt Gấu" />
+  <meta name="apple-mobile-web-app-title" content="Gấu học tiếng Việt" />
   <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3773/3773199.png" />
   <title>Tiếng Việt Của Gấu</title>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -218,7 +218,7 @@
     }
 
     // ĐIỀU CHỈNH TỐC ĐỘ ĐỌC NATIVE CHO iOS CHẬM LẠI
-    function speakVietnamese(text, rate = 0.3) {
+    function speakVietnamese(text, rate = 0.4) {
       if (!text) return;
       initAudio();
       if ('speechSynthesis' in window) {
@@ -405,7 +405,7 @@
       
       window.speechSynthesis.cancel();
       if ('speechSynthesis' in window) {
-        const utter = new SpeechSynthesisUtterance(spellString); utter.lang = 'vi-VN'; utter.rate = 0.5; // Chậm khi đánh vần
+        const utter = new SpeechSynthesisUtterance(spellString); utter.lang = 'vi-VN'; utter.rate = 0.4; // Chậm khi đánh vần
         utter.onend = () => { if(btn) btn.classList.remove('scale-105', 'bg-amber-300'); };
         window.speechSynthesis.speak(utter);
       }
