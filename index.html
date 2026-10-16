@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Tiếng Việt Gấu" />
   <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3773/3773199.png" />
-  <title>Tiếng Việt Của Gấu</title>
+  <title>Tiếng Việt Của Gấu </title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap');
@@ -27,9 +27,6 @@
     .animate-float { animation: floatBaby 3s ease-in-out infinite; }
     @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 80% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
     .animate-pop { animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
-
-    .app-view { display: none; width: 100%; height: 100%; flex-direction: column; }
-    .app-view.active { display: flex; }
 
     /* Lật thẻ */
     .flip-card { perspective: 1000px; width: 100%; height: 100%; cursor: pointer; }
@@ -53,14 +50,14 @@
     <div class="w-32 h-32 rounded-[2rem] bg-white border-4 border-amber-200 flex items-center justify-center text-6xl shadow-2xl mb-4 animate-float">📖</div>
     <span class="bg-white/20 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider mb-2">SGK Kết Nối Tri Thức</span>
     <h1 class="text-3xl sm:text-5xl font-black mb-2 drop-shadow-md">TIẾNG VIỆT LỚP 1</h1>
-    <p class="text-sm sm:text-lg font-bold text-orange-100 mb-8">Hành trình 83 bài học của Gấu</p>
+    <p class="text-sm sm:text-lg font-bold text-orange-100 mb-8">Bố mẹ đã sửa lại Bản đồ 83 bài rồi nhé!</p>
     <button onclick="startAppWithAudio()" class="btn-3d bg-white border-b-[6px] border-slate-200 text-orange-600 font-black text-xl sm:text-2xl px-8 py-4 rounded-2xl shadow-xl flex items-center gap-2">
       <span>▶️ VÀO LỚP HỌC</span><span>🔊</span>
     </button>
   </div>
 
   <!-- DASHBOARD -->
-  <div id="dashboard-view" class="app-view animate-pop relative max-w-5xl mx-auto py-2">
+  <div id="dashboard-view" class="hidden flex-col w-full h-full animate-pop relative max-w-5xl mx-auto py-2">
     <div class="flex-1 board-3d p-4 flex flex-col sm:flex-row gap-4 overflow-hidden">
       <div class="w-full sm:w-1/3 bg-gradient-to-b from-orange-50 to-amber-50 rounded-[1.5rem] border-4 border-white flex flex-col items-center justify-center p-4 shadow-inner shrink-0">
         <div class="w-24 h-24 rounded-full bg-white border-4 border-orange-300 overflow-hidden text-5xl flex items-center justify-center mb-3 animate-float">🐻</div>
@@ -130,7 +127,7 @@
     
     <div id="test-progress-bar" class="hidden w-full h-1.5 bg-white rounded-full overflow-hidden shrink-0"><div id="test-progress-fill" class="h-full bg-emerald-500 transition-all duration-300" style="width: 0%"></div></div>
 
-    <!-- Sân khấu chính thay đổi tuỳ theo chế độ Học / Ôn / Kiểm tra -->
+    <!-- Sân khấu chính -->
     <main id="game-stage" class="flex-1 board-3d p-1.5 sm:p-3 flex flex-col relative overflow-hidden bg-amber-50"></main>
   </div>
 
@@ -158,7 +155,7 @@
       {
         zoneId: 1,
         zoneName: "Chặng 1: Âm đơn & Dấu thanh (Bài 1-15)",
-        color: "emerald",
+        theme: { bg: "bg-emerald-50", border: "border-emerald-400", text: "text-emerald-800", btn: "bg-emerald-100" },
         lessons: [
           { id: 1, title: "Bài 1: A a", chars: [{c:'a', sound:'a', word:'ca hát', emoji:'🎤', t:'vowel'}] },
           { id: 2, title: "Bài 2: B b", chars: [{c:'b', sound:'bờ', word:'ba ba', emoji:'🐢', t:'con'}] },
@@ -180,7 +177,7 @@
       {
         zoneId: 2,
         zoneName: "Chặng 2: Âm ghép & Vần (Bài 16-30)",
-        color: "sky",
+        theme: { bg: "bg-sky-50", border: "border-sky-400", text: "text-sky-800", btn: "bg-sky-100" },
         lessons: [
           { id: 16, title: "Bài 16: M m, N n", chars: [{c:'m', sound:'mờ', word:'cá mè', emoji:'🐟', t:'con'}, {c:'n', sound:'nờ', word:'nơ đỏ', emoji:'🎀', t:'con'}] },
           { id: 17, title: "Bài 17: G g, Gi gi", chars: [{c:'g', sound:'gờ', word:'gà gô', emoji:'🐓', t:'con'}, {c:'gi', sound:'di', word:'giá đỗ', emoji:'🌱', t:'con'}] },
@@ -202,7 +199,7 @@
       {
         zoneId: 3,
         zoneName: "Chặng 3: Vần âm cuối n, t, m, p (Bài 31-55)",
-        color: "amber",
+        theme: { bg: "bg-amber-50", border: "border-amber-400", text: "text-amber-800", btn: "bg-amber-100" },
         lessons: [
           { id: 31, title: "Bài 31: an, ăn, ân (Demo)", chars: [{c:'an', sound:'a nờ an', word:'bạn thân', emoji:'👫', t:'vowel'}] }
         ]
@@ -210,13 +207,13 @@
       {
         zoneId: 4,
         zoneName: "Chặng 4: Vần phức tạp (Bài 56-83)",
-        color: "purple",
-        lessons: [] // Tương tự
+        theme: { bg: "bg-purple-50", border: "border-purple-400", text: "text-purple-800", btn: "bg-purple-100" },
+        lessons: []
       }
     ];
 
     // Dữ liệu cho Cỗ Máy Ghép Vần (tích lũy)
-    const MAC_CONSONANTS = ['b','c','d','đ','g','h','l','m','n','v','ch','kh','nh','th','tr','ph'];
+    const MAC_CONSONANTS = ['b','c','d','đ','g','h','k','l','m','n','v','ch','gh','kh','nh','ng','ngh','th','tr','ph'];
     const MAC_VOWELS = ['a','o','ô','ơ','u','ư','e','ê','i','ia','ua','ưa'];
     const TONES = [{ id: 'ngang', mark: '', visual: '—', name: 'Ngang' }, { id: 'huyen', mark: '\u0300', visual: 'ˋ', name: 'Huyền' }, { id: 'sac', mark: '\u0301', visual: 'ˊ', name: 'Sắc' }, { id: 'hoi', mark: '\u0309', visual: 'ˀ', name: 'Hỏi' }, { id: 'nga', mark: '\u0303', visual: '˜', name: 'Ngã' }, { id: 'nang', mark: '\u0323', visual: '•', name: 'Nặng' }];
 
@@ -231,8 +228,7 @@
     ];
 
     const state = { 
-      currentLesson: null, 
-      currentMode: null,
+      currentLesson: null, currentMode: null,
       mCIdx: 0, mVIdx: 0, mTIdx: 1, // Machine indexes
       testData: { total: 5, current: 0, correct: 0 }
     };
@@ -276,10 +272,13 @@
       setTimeout(() => speakVietnamese(`Chào ${CHILD_NAME}! Hôm nay Gấu muốn học bài nào?`), 400);
     }
 
+    const views = ['dashboard-view', 'map-view', 'game-view'];
     function switchView(viewId) {
       playSound('pop');
-      document.querySelectorAll('.app-view').forEach(el => {
-        if (el.id === viewId) { el.classList.remove('hidden'); el.classList.add('flex'); }
+      views.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (id === viewId) { el.classList.remove('hidden'); el.classList.add('flex'); }
         else { el.classList.add('hidden'); el.classList.remove('flex'); }
       });
       if(viewId === 'map-view') buildMap();
@@ -289,14 +288,11 @@
       const container = document.getElementById('zone-container');
       container.innerHTML = '';
       SYLLABUS.forEach(zone => {
-        const borderCol = `border-${zone.color}-400`;
-        const bgCol = `bg-${zone.color}-100`;
-        const textCol = `text-${zone.color}-800`;
-        
+        const th = zone.theme;
         const zoneDiv = document.createElement('div');
-        zoneDiv.className = `bg-white rounded-2xl border-4 ${borderCol} shadow-sm overflow-hidden`;
+        zoneDiv.className = `bg-white rounded-2xl border-4 ${th.border} shadow-sm overflow-hidden`;
         
-        let html = `<div class="${bgCol} ${textCol} font-black px-4 py-2 text-sm sm:text-base border-b-2 ${borderCol}">${zone.zoneName}</div><div class="flex flex-col">`;
+        let html = `<div class="${th.bg} ${th.text} font-black px-4 py-2 text-sm sm:text-base border-b-2 ${th.border}">${zone.zoneName}</div><div class="flex flex-col">`;
         
         zone.lessons.forEach(lesson => {
           let icon = '📖';
@@ -305,7 +301,7 @@
           
           html += `
             <button onclick="openLessonModal(${zone.zoneId}, ${lesson.id})" class="btn-3d flex items-center gap-3 p-3 border-b border-slate-100 active:bg-slate-50 text-left">
-              <div class="w-10 h-10 rounded-xl ${bgCol} flex items-center justify-center text-lg shrink-0">${icon}</div>
+              <div class="w-10 h-10 rounded-xl ${th.btn} ${th.border} border-2 flex items-center justify-center text-lg shrink-0">${icon}</div>
               <div class="font-black text-slate-700 text-sm sm:text-base">${lesson.title}</div>
             </button>
           `;
@@ -356,23 +352,23 @@
     function renderLearnMode(stage) {
       stage.className = 'flex-1 board-3d p-3 flex flex-col relative overflow-hidden bg-amber-50';
       if (!state.currentLesson.chars || state.currentLesson.chars.length === 0) {
-        stage.innerHTML = `<div class="flex items-center justify-center h-full font-black text-slate-400">Đây là bài ôn tập chung</div>`;
+        stage.innerHTML = `<div class="flex flex-col items-center justify-center h-full font-black text-slate-400 gap-4"><div class="text-6xl">🔄</div><div>Đây là bài ôn tập chung</div></div>`;
         return;
       }
       
-      let gridHTML = '<div class="text-center text-amber-700 font-black text-sm mb-3">Chạm vào thẻ để nghe đọc chữ nhé!</div><div class="flex-1 overflow-y-auto flex flex-wrap justify-center gap-4 pb-4">';
+      let gridHTML = '<div class="text-center text-amber-700 font-black text-xs sm:text-sm mb-3">Chạm vào thẻ để nghe đọc chữ nhé!</div><div class="flex-1 overflow-y-auto flex flex-wrap justify-center gap-3 pb-4">';
       
       state.currentLesson.chars.forEach((item, idx) => {
         const frontClass = item.t === 'vowel' ? 'vowel-front' : 'consonant-front';
-        const fontSize = item.c.length > 1 ? 'text-5xl' : 'text-7xl';
+        const fontSize = item.c.length > 2 ? 'text-3xl sm:text-5xl' : item.c.length > 1 ? 'text-4xl sm:text-6xl' : 'text-6xl sm:text-7xl';
         gridHTML += `
-          <div class="w-32 sm:w-40 aspect-[4/5] shrink-0">
+          <div class="w-28 sm:w-36 aspect-[4/5] shrink-0">
             <div class="flip-card" id="card-${idx}" onclick="flipCard(${idx}, '${item.sound}', '${item.word}')">
               <div class="flip-card-inner">
                 <div class="flip-card-front ${frontClass} border-4"><span class="${fontSize} font-black">${item.c}</span></div>
                 <div class="flip-card-back border-4">
-                  <span class="text-5xl mb-2 animate-float">${item.emoji}</span>
-                  <span class="text-sm font-black text-pink-600 truncate px-1">${item.word}</span>
+                  <span class="text-4xl sm:text-5xl mb-2 animate-float">${item.emoji}</span>
+                  <span class="text-xs sm:text-sm font-black text-pink-600 truncate px-1">${item.word}</span>
                 </div>
               </div>
             </div>
@@ -393,37 +389,49 @@
       }
     }
 
-    // 2. CHẾ ĐỘ ÔN TẬP (MÁY GHÉP VẦN)
+    // 2. CHẾ ĐỘ ÔN TẬP (MÁY GHÉP VẦN) - ÁP DỤNG LUẬT CHÍNH TẢ
+    function getSpellingRule(c, v) {
+      const e_group = ['e','ê','i','ia'];
+      if (c === 'c' && e_group.includes(v)) return 'k';
+      if (c === 'g' && e_group.includes(v)) return 'gh';
+      if (c === 'ng' && e_group.includes(v)) return 'ngh';
+      if (c === 'k' && !e_group.includes(v)) return 'c';
+      if (c === 'gh' && !e_group.includes(v)) return 'g';
+      if (c === 'ngh' && !e_group.includes(v)) return 'ng';
+      return c;
+    }
+
     function renderMachineMode(stage) {
       stage.className = 'flex-1 board-3d p-2 sm:p-4 flex flex-col relative overflow-y-auto bg-slate-50 justify-center';
       stage.innerHTML = `
-        <div class="bg-gradient-to-b from-slate-100 to-slate-200 border-4 border-slate-300 rounded-3xl p-3 sm:p-5 flex flex-col gap-4 max-w-lg mx-auto w-full shadow-inner">
+        <div class="slot-machine p-3 sm:p-5 flex flex-col gap-4 max-w-lg mx-auto w-full">
           <div class="bg-white rounded-2xl border-4 border-purple-200 p-2 text-center shadow-sm relative overflow-hidden">
-            <div class="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-1">KẾT QUẢ</div>
-            <div id="final-word" class="text-6xl sm:text-7xl font-black text-purple-700 h-20 flex items-center justify-center animate-pop">bà</div>
+            <div class="text-[10px] sm:text-xs font-black text-purple-400 uppercase tracking-widest mb-1">KẾT QUẢ</div>
+            <div id="final-word" class="text-5xl sm:text-7xl font-black text-purple-700 h-20 flex items-center justify-center animate-pop">bà</div>
           </div>
           <div class="flex justify-between gap-1.5 sm:gap-4">
             <div class="flex-1 flex flex-col gap-1 sm:gap-2">
-              <button onclick="changeSlot('c', -1)" class="btn-3d bg-white border-2 border-slate-300 rounded-xl h-10 text-slate-500 font-black">▲</button>
-              <div class="bg-white border-4 border-slate-300 rounded-xl h-24 overflow-hidden relative"><div id="slot-c" class="text-4xl font-black text-sky-600 flex items-center justify-center h-full transition-transform">b</div></div>
-              <button onclick="changeSlot('c', 1)" class="btn-3d bg-white border-2 border-slate-300 rounded-xl h-10 text-slate-500 font-black">▼</button>
+              <button onclick="changeSlot('c', -1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 text-slate-500 font-black shadow-sm">▲</button>
+              <div class="slot-window h-[80px] sm:h-[100px]"><div id="slot-c" class="slot-item text-sky-600">b</div></div>
+              <button onclick="changeSlot('c', 1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 text-slate-500 font-black shadow-sm">▼</button>
             </div>
             <div class="flex flex-col justify-center text-3xl font-black text-slate-300 mt-6">+</div>
             <div class="flex-1 flex flex-col gap-1 sm:gap-2">
-              <button onclick="changeSlot('v', -1)" class="btn-3d bg-white border-2 border-slate-300 rounded-xl h-10 text-slate-500 font-black">▲</button>
-              <div class="bg-white border-4 border-slate-300 rounded-xl h-24 overflow-hidden relative"><div id="slot-v" class="text-4xl font-black text-rose-600 flex items-center justify-center h-full transition-transform">a</div></div>
-              <button onclick="changeSlot('v', 1)" class="btn-3d bg-white border-2 border-slate-300 rounded-xl h-10 text-slate-500 font-black">▼</button>
+              <button onclick="changeSlot('v', -1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 text-slate-500 font-black shadow-sm">▲</button>
+              <div class="slot-window h-[80px] sm:h-[100px]"><div id="slot-v" class="slot-item text-rose-600">a</div></div>
+              <button onclick="changeSlot('v', 1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 text-slate-500 font-black shadow-sm">▼</button>
             </div>
             <div class="flex flex-col justify-center text-3xl font-black text-slate-300 mt-6">+</div>
             <div class="flex-1 flex flex-col gap-1 sm:gap-2">
-              <button onclick="changeSlot('t', -1)" class="btn-3d bg-white border-2 border-slate-300 rounded-xl h-10 text-slate-500 font-black">▲</button>
-              <div class="bg-slate-50 border-4 border-slate-300 rounded-xl h-24 flex flex-col items-center justify-center">
-                <div id="slot-t-visual" class="text-4xl text-emerald-600 font-black">` + TONES[state.mTIdx].visual + `</div>
+              <button onclick="changeSlot('t', -1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 text-slate-500 font-black shadow-sm">▲</button>
+              <div class="slot-window h-[80px] sm:h-[100px] bg-slate-50 flex flex-col justify-center">
+                <div id="slot-t-visual" class="text-4xl sm:text-5xl text-emerald-600 font-black text-center mb-1">` + TONES[state.mTIdx].visual + `</div>
+                <div id="slot-t-name" class="text-center text-[8px] sm:text-[10px] font-black text-emerald-500 uppercase">Huyền</div>
               </div>
-              <button onclick="changeSlot('t', 1)" class="btn-3d bg-white border-2 border-slate-300 rounded-xl h-10 text-slate-500 font-black">▼</button>
+              <button onclick="changeSlot('t', 1)" class="btn-3d bg-white border-2 border-slate-300 rounded-lg sm:rounded-xl h-8 sm:h-10 text-slate-500 font-black shadow-sm">▼</button>
             </div>
           </div>
-          <button onclick="playMachineResult()" class="btn-3d w-full mt-2 bg-amber-400 border-b-[6px] border-amber-600 text-amber-950 text-2xl font-black py-4 rounded-2xl shadow-lg">🪄 ĐÁNH VẦN NÀO</button>
+          <button onclick="playMachineResult()" class="btn-3d w-full mt-2 bg-amber-400 border-b-[6px] border-amber-600 text-amber-950 text-xl sm:text-2xl font-black py-3 sm:py-4 rounded-2xl shadow-lg">🪄 ĐÁNH VẦN</button>
         </div>
       `;
       updateSlotUI();
@@ -438,14 +446,19 @@
     }
 
     function updateSlotUI() {
-      document.getElementById('slot-c').textContent = MAC_CONSONANTS[state.mCIdx];
-      document.getElementById('slot-v').textContent = MAC_VOWELS[state.mVIdx];
-      document.getElementById('slot-t-visual').textContent = TONES[state.mTIdx].visual;
+      let cRaw = MAC_CONSONANTS[state.mCIdx];
+      let v = MAC_VOWELS[state.mVIdx];
       
-      let c = MAC_CONSONANTS[state.mCIdx]; let v = MAC_VOWELS[state.mVIdx];
-      if(c==='k' && !['e','ê','i'].includes(v)) c='c';
-      if(c==='gh' && !['e','ê','i'].includes(v)) c='g';
-      if(c==='ngh' && !['e','ê','i'].includes(v)) c='ng';
+      // Áp dụng luật chính tả lên Giao diện
+      let c = getSpellingRule(cRaw, v);
+      
+      const elC = document.getElementById('slot-c');
+      elC.textContent = c;
+      elC.className = `slot-item text-sky-600 ${c.length > 2 ? 'text-3xl sm:text-4xl' : c.length > 1 ? 'text-4xl sm:text-5xl' : 'text-5xl sm:text-6xl'}`;
+
+      document.getElementById('slot-v').textContent = v;
+      document.getElementById('slot-t-visual').textContent = TONES[state.mTIdx].visual;
+      document.getElementById('slot-t-name').textContent = TONES[state.mTIdx].name;
       
       const res = document.getElementById('final-word');
       res.textContent = (c + v + TONES[state.mTIdx].mark).normalize('NFC');
@@ -453,18 +466,36 @@
     }
 
     window.playMachineResult = function() {
-      const c = MAC_CONSONANTS[state.mCIdx]; const v = MAC_VOWELS[state.mVIdx]; const t = TONES[state.mTIdx];
-      // Basic sound map
-      const sMap = {'b':'bờ','c':'cờ','k':'ca','d':'dờ','đ':'đờ','g':'gờ','gh':'gờ','h':'hờ','l':'lờ','m':'mờ','n':'nờ','v':'vờ','ch':'chờ','kh':'khờ','nh':'nhờ','th':'thờ','tr':'trờ','ph':'phờ'};
-      const cSound = sMap[c] || c;
-      const vSound = v.split('').join(' '); // ia -> i a ia
+      let cRaw = MAC_CONSONANTS[state.mCIdx];
+      let v = MAC_VOWELS[state.mVIdx];
+      let t = TONES[state.mTIdx];
       
-      let baseC = c; if(c==='k'&&!['e','ê','i'].includes(v))baseC='c'; if(c==='gh'&&!['e','ê','i'].includes(v))baseC='g'; if(c==='ngh'&&!['e','ê','i'].includes(v))baseC='ng';
-      const baseWord = (baseC + v).normalize('NFC');
-      const finalWord = (baseC + v + t.mark).normalize('NFC');
+      let c = getSpellingRule(cRaw, v);
+      
+      // Tìm âm đọc của c (kể cả khi đã biến đổi)
+      const sMap = {'b':'bờ','c':'cờ','k':'ca','d':'dờ','đ':'đờ','g':'gờ','gh':'gờ','h':'hờ','l':'lờ','m':'mờ','n':'nờ','v':'vờ','ch':'chờ','kh':'khờ','nh':'nhờ','th':'thờ','tr':'trờ','ph':'phờ','ng':'ngờ','ngh':'ngờ'};
+      const cSound = sMap[c] || c;
+      const vSound = v.split('').join(' '); 
+      
+      const baseWord = (c + v).normalize('NFC');
+      const finalWord = (c + v + t.mark).normalize('NFC');
       
       let spellString = t.id === 'ngang' ? `${cSound}, ${vSound}, ${baseWord}` : `${cSound}, ${vSound}, ${baseWord}, dấu ${t.name.toLowerCase()}, ${finalWord}`;
-      speakVietnamese(spellString);
+      
+      const btn = document.querySelector('#machine-view button[onclick="playMachineResult()"]');
+      if(btn) btn.classList.add('scale-105', 'bg-amber-300');
+      
+      window.speechSynthesis.cancel();
+      const url = `https://translate.googleapis.com/translate_tts?client=gtx&ie=UTF-8&tl=vi&q=${encodeURIComponent(spellString)}`;
+      ttsPlayer.pause(); ttsPlayer.src = url;
+      ttsPlayer.play().then(() => { ttsPlayer.onended = () => { if(btn) btn.classList.remove('scale-105', 'bg-amber-300'); } })
+      .catch(() => {
+        if ('speechSynthesis' in window) {
+          const utter = new SpeechSynthesisUtterance(spellString); utter.lang = 'vi-VN'; utter.rate = 0.8;
+          utter.onend = () => { if(btn) btn.classList.remove('scale-105', 'bg-amber-300'); };
+          window.speechSynthesis.speak(utter);
+        }
+      });
     }
 
     // 3. CHẾ ĐỘ KIỂM TRA (TRẮC NGHIỆM ĐIỀN CHỮ)
@@ -476,13 +507,13 @@
       state.currentQuiz = q;
       
       stage.innerHTML = `
-        <div class="text-7xl mb-6 animate-float">${q.emoji}</div>
+        <div class="text-7xl sm:text-8xl mb-6 animate-float">${q.emoji}</div>
         <div class="flex items-center gap-2 mb-10">
-          <div id="quiz-blank" class="min-w-[5rem] px-2 h-24 bg-white border-4 border-dashed border-emerald-400 rounded-2xl flex items-center justify-center text-6xl font-black text-emerald-600 shadow-inner">?</div>
-          <div class="text-6xl font-black text-slate-700">${q.display}</div>
+          <div id="quiz-blank" class="min-w-[4rem] px-2 h-20 sm:min-w-[6rem] sm:h-24 bg-white border-4 border-dashed border-emerald-400 rounded-2xl flex items-center justify-center text-4xl sm:text-6xl font-black text-emerald-600 shadow-inner transition-all">?</div>
+          <div class="text-5xl sm:text-7xl font-black text-slate-700 tracking-tight">${q.display}</div>
         </div>
-        <div class="flex justify-center gap-4 w-full max-w-md">
-          ${q.options.map(opt => `<button onclick="checkQuizAnswer('${opt}')" class="btn-3d flex-1 bg-white border-4 border-slate-200 border-b-[6px] text-slate-700 text-4xl font-black py-4 rounded-2xl shadow hover:bg-slate-50">${opt}</button>`).join('')}
+        <div class="flex justify-center gap-3 sm:gap-6 w-full max-w-md">
+          ${q.options.map(opt => `<button onclick="checkQuizAnswer('${opt}')" class="btn-3d flex-1 bg-white border-4 border-slate-200 border-b-[6px] text-slate-700 text-3xl sm:text-5xl font-black py-3 sm:py-4 rounded-2xl shadow hover:bg-slate-50">${opt}</button>`).join('')}
         </div>
       `;
       setTimeout(() => speakVietnamese(q.word), 500);
@@ -492,7 +523,7 @@
       if (selectedLetter === state.currentQuiz.missing) {
         playSound('success'); triggerConfetti();
         const blank = document.getElementById('quiz-blank');
-        blank.className = 'min-w-[5rem] px-2 h-24 bg-emerald-500 border-4 border-emerald-600 rounded-2xl flex items-center justify-center text-5xl font-black text-white shadow-lg animate-pop';
+        blank.className = 'min-w-[4rem] px-2 h-20 sm:min-w-[6rem] sm:h-24 bg-emerald-500 border-4 border-emerald-600 rounded-2xl flex items-center justify-center text-4xl sm:text-6xl font-black text-white shadow-lg animate-pop';
         blank.textContent = selectedLetter;
         speakVietnamese(`Đúng rồi! ${state.currentQuiz.word}`);
         
@@ -504,7 +535,7 @@
           else showTestResult();
         }, 2000);
       } else {
-        playSound('wrong'); speakVietnamese(`Sai rồi, Gấu nhớ lại luật chính tả nhé!`);
+        playSound('wrong'); speakVietnamese(`Sai rồi, Gấu nhớ lại luật chính tả e, ê, i nhé!`);
         setTimeout(() => {
           state.testData.current++;
           if (state.testData.current < state.testData.total) renderTestMode(document.getElementById('game-stage'));
