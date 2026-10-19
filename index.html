@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="Gấu học tiếng Việt" />
+  <meta name="apple-mobile-web-app-title" content="Tiếng Việt Gấu" />
   <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3773/3773199.png" />
-  <title>Tiếng Việt Của Gấu</title>
+  <title>Tiếng Việt Của Gấu </title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap');
@@ -27,6 +27,9 @@
     .animate-float { animation: floatBaby 3s ease-in-out infinite; }
     @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 80% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
     .animate-pop { animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+    .app-view { display: none; width: 100%; height: 100%; flex-direction: column; }
+    .app-view.active { display: flex; }
 
     /* Lật thẻ */
     .flip-card { perspective: 1000px; width: 100%; height: 100%; cursor: pointer; }
@@ -50,7 +53,7 @@
     <div class="w-32 h-32 rounded-[2rem] bg-white border-4 border-amber-200 flex items-center justify-center text-6xl shadow-2xl mb-4 animate-float">📖</div>
     <span class="bg-white/20 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider mb-2">SGK Kết Nối Tri Thức</span>
     <h1 class="text-3xl sm:text-5xl font-black mb-2 drop-shadow-md">TIẾNG VIỆT LỚP 1</h1>
-    <p class="text-sm sm:text-lg font-bold text-orange-100 mb-8">
+    <p class="text-sm sm:text-lg font-bold text-orange-100 mb-8">Các bài học đã được gom nhóm cho Gấu dễ thao tác!</p>
     <button onclick="startAppWithAudio()" class="btn-3d bg-white border-b-[6px] border-slate-200 text-orange-600 font-black text-xl sm:text-2xl px-8 py-4 rounded-2xl shadow-xl flex items-center gap-2">
       <span>▶️ VÀO LỚP HỌC</span><span>🔊</span>
     </button>
@@ -65,7 +68,7 @@
         <div class="bg-amber-100 text-amber-800 px-4 py-1.5 rounded-full font-black text-sm border-2 border-amber-300 mt-2 flex items-center gap-2">
           ⭐ <span id="dash-stars">0</span> Sao
         </div>
-        <button onclick="switchView('map-view')" class="mt-6 btn-3d w-full bg-sky-500 border-b-[6px] border-sky-700 text-white text-lg font-black py-3 rounded-2xl shadow flex justify-center items-center gap-2">🗺️ BẢN ĐỒ LỘ TRÌNH</button>
+        <button onclick="switchView('map-view')" class="mt-6 btn-3d w-full bg-sky-500 border-b-[6px] border-sky-700 text-white text-lg font-black py-3 rounded-2xl shadow flex justify-center items-center gap-2">🗺️ BẢN ĐỒ GOM NHÓM</button>
       </div>
       <div class="flex-1 flex flex-col gap-3 overflow-y-auto">
         <div class="bg-orange-100 rounded-2xl p-4 border-2 border-orange-200">
@@ -73,7 +76,7 @@
           <div class="w-full h-4 bg-orange-200 rounded-full overflow-hidden">
             <div id="course-progress" class="h-full bg-orange-500 transition-all duration-500" style="width: 2%"></div>
           </div>
-          <div class="text-xs font-bold text-orange-600 mt-1 text-right"><span id="learned-count">0</span> / 83 Bài</div>
+          <div class="text-xs font-bold text-orange-600 mt-1 text-right">Chặng 1 / 6</div>
         </div>
       </div>
     </div>
@@ -83,11 +86,11 @@
   <div id="map-view" class="hidden flex-col w-full h-full animate-pop relative px-1 py-2 sm:p-2">
     <header class="bg-white rounded-2xl shadow border-2 border-amber-200 px-2 py-2 shrink-0 flex justify-between items-center z-10 mb-2">
       <button onclick="switchView('dashboard-view')" class="btn-3d bg-slate-100 font-black text-slate-600 px-3 py-1.5 rounded-xl border-b-4 border-slate-300 text-xs sm:text-sm">⬅️ Góc Học Tập</button>
-      <div class="font-black text-base sm:text-lg text-amber-800">🗺️ Hành Trình Học</div>
+      <div class="font-black text-base sm:text-lg text-amber-800">🗺️ Các Tuần Học</div>
     </header>
     <div class="flex-1 board-3d map-bg p-3 flex flex-col overflow-y-auto relative">
       <div id="zone-container" class="w-full max-w-lg mx-auto flex flex-col gap-4 py-2">
-        <!-- Render các Chặng bằng JS -->
+        <!-- Render các Nhóm bằng JS -->
       </div>
     </div>
   </div>
@@ -96,18 +99,18 @@
   <div id="lesson-modal" class="hidden fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white w-full max-w-sm rounded-3xl border-4 border-sky-300 flex flex-col overflow-hidden animate-pop shadow-2xl">
       <div class="bg-sky-500 text-white px-4 py-3 flex justify-between items-center">
-        <h3 id="modal-lesson-title" class="font-black text-base sm:text-lg truncate">Tên Bài</h3>
+        <h3 id="modal-lesson-title" class="font-black text-base sm:text-lg truncate">Tên Nhóm</h3>
         <button onclick="closeLessonModal()" class="font-black px-2">✕</button>
       </div>
       <div class="p-4 flex flex-col gap-3 bg-sky-50">
         <button onclick="startMode('learn')" class="btn-3d bg-white border-4 border-pink-400 border-b-[6px] rounded-2xl p-3 sm:p-4 text-left flex gap-3 sm:gap-4 items-center shadow-sm">
-          <span class="text-3xl sm:text-4xl">🎓</span><div class="min-w-0"><div class="font-black text-pink-600 text-base sm:text-lg">Học Bài Mới</div><div class="text-[10px] sm:text-xs text-slate-500 font-bold truncate">Lật thẻ nghe đọc chữ</div></div>
+          <span class="text-3xl sm:text-4xl">🎓</span><div class="min-w-0"><div class="font-black text-pink-600 text-base sm:text-lg">Học Nhóm Chữ</div><div class="text-[10px] sm:text-xs text-slate-500 font-bold truncate">Lật thẻ nghe đọc chữ</div></div>
         </button>
         <button onclick="startMode('review')" class="btn-3d bg-white border-4 border-sky-400 border-b-[6px] rounded-2xl p-3 sm:p-4 text-left flex gap-3 sm:gap-4 items-center shadow-sm">
           <span class="text-3xl sm:text-4xl">🔁</span><div class="min-w-0"><div class="font-black text-sky-600 text-base sm:text-lg">Ôn Tập Ghép Vần</div><div class="text-[10px] sm:text-xs text-slate-500 font-bold truncate">Máy ghép vần thông minh</div></div>
         </button>
         <button onclick="startMode('test')" class="btn-3d bg-white border-4 border-emerald-400 border-b-[6px] rounded-2xl p-3 sm:p-4 text-left flex gap-3 sm:gap-4 items-center shadow-sm">
-          <span class="text-3xl sm:text-4xl">📝</span><div class="min-w-0"><div class="font-black text-emerald-600 text-base sm:text-lg">Kiểm Tra</div><div class="text-[10px] sm:text-xs text-slate-500 font-bold truncate">Điền chữ lấy điểm Sao</div></div>
+          <span class="text-3xl sm:text-4xl">📝</span><div class="min-w-0"><div class="font-black text-emerald-600 text-base sm:text-lg">Kiểm Tra Trắc Nghiệm</div><div class="text-[10px] sm:text-xs text-slate-500 font-bold truncate">Điền chữ lấy điểm Sao</div></div>
         </button>
       </div>
     </div>
@@ -147,45 +150,87 @@
     const CHILD_NAME = 'Gấu';
     let stars = parseInt(localStorage.getItem('tv1_stars') || '0', 10);
     
-    // --- DATABASE BÁM SÁT SGK ---
+    // --- DATABASE ĐƯỢC GOM NHÓM (MỖI NHÓM 5 BÀI THEO SGK) ---
     const SYLLABUS = [
       {
-        zoneId: 1, zoneName: "Chặng 1: Âm đơn & Dấu (Bài 1-15)", theme: { bg: "bg-emerald-50", border: "border-emerald-400", text: "text-emerald-800", btn: "bg-emerald-100" },
-        lessons: [
-          { id: 1, title: "Bài 1: A a", chars: [{c:'a', sound:'a', word:'ca hát', emoji:'🎤', t:'vowel'}] },
-          { id: 2, title: "Bài 2: B b", chars: [{c:'b', sound:'bờ', word:'ba ba', emoji:'🐢', t:'con'}] },
-          { id: 3, title: "Bài 3: C c", chars: [{c:'c', sound:'cờ', word:'con cá', emoji:'🐟', t:'con'}] },
-          { id: 4, title: "Bài 4: E e, Ê ê", chars: [{c:'e', sound:'e', word:'em bé', emoji:'👶', t:'vowel'}, {c:'ê', sound:'ê', word:'bế bé', emoji:'🤱', t:'vowel'}] },
-          { id: 6, title: "Bài 6: O o", chars: [{c:'o', sound:'o', word:'con bò', emoji:'🐄', t:'vowel'}] },
-          { id: 7, title: "Bài 7: Ô ô", chars: [{c:'ô', sound:'ô', word:'ô tô', emoji:'🚗', t:'vowel'}] },
-          { id: 8, title: "Bài 8: D d, Đ đ", chars: [{c:'d', sound:'dờ', word:'con dê', emoji:'🐐', t:'con'}, {c:'đ', sound:'đờ', word:'đi đò', emoji:'🛶', t:'con'}] },
-          { id: 9, title: "Bài 9: Ơ ơ", chars: [{c:'ơ', sound:'ơ', word:'cá cờ', emoji:'🐠', t:'vowel'}] },
-          { id: 11, title: "Bài 11: I i, K k", chars: [{c:'i', sound:'i', word:'viên bi', emoji:'🔵', t:'vowel'}, {c:'k', sound:'ca', word:'kì đà', emoji:'🦎', t:'con'}] },
-          { id: 12, title: "Bài 12: H h, L l", chars: [{c:'h', sound:'hờ', word:'bờ hồ', emoji:'🏞️', t:'con'}, {c:'l', sound:'lờ', word:'le le', emoji:'🦆', t:'con'}] },
-          { id: 13, title: "Bài 13: U u, Ư ư", chars: [{c:'u', sound:'u', word:'quả đu đủ', emoji:'🍈', t:'vowel'}, {c:'ư', sound:'ư', word:'sư tử', emoji:'🦁', t:'vowel'}] },
-          { id: 14, title: "Bài 14: Ch ch, Kh kh", chars: [{c:'ch', sound:'chờ', word:'chú khỉ', emoji:'🐒', t:'con'}, {c:'kh', sound:'khờ', word:'lá khô', emoji:'🍂', t:'con'}] },
+        id: 1, title: "Nhóm 1 (Tuần 1: Bài 1-5)", desc: "a, b, c, e, ê",
+        theme: { bg: "bg-emerald-50", border: "border-emerald-400", text: "text-emerald-800", btn: "bg-emerald-100" },
+        chars: [
+          {c:'a', sound:'a', word:'ca hát', emoji:'🎤', t:'vowel'},
+          {c:'b', sound:'bờ', word:'ba ba', emoji:'🐢', t:'con'},
+          {c:'c', sound:'cờ', word:'con cá', emoji:'🐟', t:'con'},
+          {c:'e', sound:'e', word:'em bé', emoji:'👶', t:'vowel'},
+          {c:'ê', sound:'ê', word:'bế bé', emoji:'🤱', t:'vowel'}
         ]
       },
       {
-        zoneId: 2, zoneName: "Chặng 2: Âm ghép (Bài 16-28)", theme: { bg: "bg-sky-50", border: "border-sky-400", text: "text-sky-800", btn: "bg-sky-100" },
-        lessons: [
-          { id: 16, title: "Bài 16: M m, N n", chars: [{c:'m', sound:'mờ', word:'cá mè', emoji:'🐟', t:'con'}, {c:'n', sound:'nờ', word:'nơ đỏ', emoji:'🎀', t:'con'}] },
-          { id: 17, title: "Bài 17: G g, Gi gi", chars: [{c:'g', sound:'gờ', word:'gà gô', emoji:'🐓', t:'con'}, {c:'gi', sound:'di', word:'giá đỗ', emoji:'🌱', t:'con'}] },
-          { id: 18, title: "Bài 18: Gh gh, Nh nh", chars: [{c:'gh', sound:'gờ', word:'ghế đá', emoji:'🪑', t:'con'}, {c:'nh', sound:'nhờ', word:'nhà gỗ', emoji:'🏠', t:'con'}] },
-          { id: 19, title: "Bài 19: Ng ng, Ngh ngh", chars: [{c:'ng', sound:'ngờ', word:'ngã ba', emoji:'🛣️', t:'con'}, {c:'ngh', sound:'ngờ', word:'củ nghệ', emoji:'🥔', t:'con'}] },
-          { id: 21, title: "Bài 21: R r, S s", chars: [{c:'r', sound:'rờ', word:'rổ rá', emoji:'🧺', t:'con'}, {c:'s', sound:'sờ', word:'chữ số', emoji:'🔢', t:'con'}] },
-          { id: 22, title: "Bài 22: T t, Tr tr", chars: [{c:'t', sound:'tờ', word:'cái tủ', emoji:'🗄️', t:'con'}, {c:'tr', sound:'trờ', word:'cá trê', emoji:'🐟', t:'con'}] },
-          { id: 23, title: "Bài 23: Th th, ia", chars: [{c:'th', sound:'thờ', word:'cái thìa', emoji:'🥄', t:'con'}, {c:'ia', sound:'i a ia', word:'lá tía tô', emoji:'🌿', t:'vowel'}] },
-          { id: 24, title: "Bài 24: ua, ưa", chars: [{c:'ua', sound:'u a ua', word:'cà chua', emoji:'🍅', t:'vowel'}, {c:'ưa', sound:'ư a ưa', word:'dưa lê', emoji:'🍈', t:'vowel'}] },
-          { id: 26, title: "Bài 26: Ph ph, Qu qu", chars: [{c:'ph', sound:'phờ', word:'phố cổ', emoji:'🏘️', t:'con'}, {c:'qu', sound:'quờ', word:'quả khế', emoji:'⭐', t:'con'}] },
-          { id: 27, title: "Bài 27: V v, X x", chars: [{c:'v', sound:'vờ', word:'quyển vở', emoji:'📔', t:'con'}, {c:'x', sound:'sờ', word:'xe lu', emoji:'🚜', t:'con'}] },
-          { id: 28, title: "Bài 28: Y y", chars: [{c:'y', sound:'i', word:'y tá', emoji:'👩‍⚕️', t:'vowel'}] }
+        id: 2, title: "Nhóm 2 (Tuần 2: Bài 6-10)", desc: "o, ô, ơ, d, đ",
+        theme: { bg: "bg-sky-50", border: "border-sky-400", text: "text-sky-800", btn: "bg-sky-100" },
+        chars: [
+          {c:'o', sound:'o', word:'con bò', emoji:'🐄', t:'vowel'},
+          {c:'ô', sound:'ô', word:'ô tô', emoji:'🚗', t:'vowel'},
+          {c:'ơ', sound:'ơ', word:'cá cờ', emoji:'🐠', t:'vowel'},
+          {c:'d', sound:'dờ', word:'con dê', emoji:'🐐', t:'con'},
+          {c:'đ', sound:'đờ', word:'đi đò', emoji:'🛶', t:'con'}
+        ]
+      },
+      {
+        id: 3, title: "Nhóm 3 (Tuần 3: Bài 11-15)", desc: "i, k, h, l, u, ư, ch, kh",
+        theme: { bg: "bg-amber-50", border: "border-amber-400", text: "text-amber-800", btn: "bg-amber-100" },
+        chars: [
+          {c:'i', sound:'i', word:'viên bi', emoji:'🔵', t:'vowel'},
+          {c:'k', sound:'ca', word:'kì đà', emoji:'🦎', t:'con'},
+          {c:'h', sound:'hờ', word:'bờ hồ', emoji:'🏞️', t:'con'},
+          {c:'l', sound:'lờ', word:'le le', emoji:'🦆', t:'con'},
+          {c:'u', sound:'u', word:'đu đủ', emoji:'🍈', t:'vowel'},
+          {c:'ư', sound:'ư', word:'sư tử', emoji:'🦁', t:'vowel'},
+          {c:'ch', sound:'chờ', word:'chú khỉ', emoji:'🐒', t:'con'},
+          {c:'kh', sound:'khờ', word:'lá khô', emoji:'🍂', t:'con'}
+        ]
+      },
+      {
+        id: 4, title: "Nhóm 4 (Tuần 4: Bài 16-20)", desc: "m, n, g, gi, gh, nh, ng, ngh",
+        theme: { bg: "bg-pink-50", border: "border-pink-400", text: "text-pink-800", btn: "bg-pink-100" },
+        chars: [
+          {c:'m', sound:'mờ', word:'cá mè', emoji:'🐟', t:'con'},
+          {c:'n', sound:'nờ', word:'nơ đỏ', emoji:'🎀', t:'con'},
+          {c:'g', sound:'gờ', word:'gà gô', emoji:'🐓', t:'con'},
+          {c:'gi', sound:'di', word:'giá đỗ', emoji:'🌱', t:'con'},
+          {c:'gh', sound:'gờ', word:'ghế đá', emoji:'🪑', t:'con'},
+          {c:'nh', sound:'nhờ', word:'nhà gỗ', emoji:'🏠', t:'con'},
+          {c:'ng', sound:'ngờ', word:'ngã ba', emoji:'🛣️', t:'con'},
+          {c:'ngh', sound:'ngờ', word:'củ nghệ', emoji:'🥔', t:'con'}
+        ]
+      },
+      {
+        id: 5, title: "Nhóm 5 (Tuần 5: Bài 21-25)", desc: "r, s, t, tr, th, ia, ua, ưa",
+        theme: { bg: "bg-purple-50", border: "border-purple-400", text: "text-purple-800", btn: "bg-purple-100" },
+        chars: [
+          {c:'r', sound:'rờ', word:'rổ rá', emoji:'🧺', t:'con'},
+          {c:'s', sound:'sờ', word:'chữ số', emoji:'🔢', t:'con'},
+          {c:'t', sound:'tờ', word:'cái tủ', emoji:'🗄️', t:'con'},
+          {c:'tr', sound:'trờ', word:'cá trê', emoji:'🐟', t:'con'},
+          {c:'th', sound:'thờ', word:'cái thìa', emoji:'🥄', t:'con'},
+          {c:'ia', sound:'i a ia', word:'tía tô', emoji:'🌿', t:'vowel'},
+          {c:'ua', sound:'u a ua', word:'cà chua', emoji:'🍅', t:'vowel'},
+          {c:'ưa', sound:'ư a ưa', word:'dưa lê', emoji:'🍈', t:'vowel'}
+        ]
+      },
+      {
+        id: 6, title: "Nhóm 6 (Tuần 6: Bài 26-30)", desc: "ph, qu, v, x, y, Ôn tập luật",
+        theme: { bg: "bg-orange-50", border: "border-orange-400", text: "text-orange-800", btn: "bg-orange-100" },
+        chars: [
+          {c:'ph', sound:'phờ', word:'phố cổ', emoji:'🏘️', t:'con'},
+          {c:'qu', sound:'quờ', word:'quả khế', emoji:'⭐', t:'con'},
+          {c:'v', sound:'vờ', word:'quyển vở', emoji:'📔', t:'con'},
+          {c:'x', sound:'sờ', word:'xe lu', emoji:'🚜', t:'con'},
+          {c:'y', sound:'i', word:'y tá', emoji:'👩‍⚕️', t:'vowel'}
         ]
       }
     ];
 
-    const MAC_CONSONANTS = ['b','c','d','đ','g','h','k','l','m','n','v','ch','gh','kh','nh','ng','ngh','th','tr','ph'];
-    const MAC_VOWELS = ['a','o','ô','ơ','u','ư','e','ê','i','ia','ua','ưa'];
+    const MAC_CONSONANTS = ['b','c','d','đ','g','h','k','l','m','n','r','s','t','v','x','ch','gh','kh','nh','ng','ngh','ph','qu','th','tr'];
+    const MAC_VOWELS = ['a','o','ô','ơ','u','ư','e','ê','i','y','ia','ua','ưa'];
     const TONES = [{ id: 'ngang', mark: '', visual: '—', name: 'Ngang' }, { id: 'huyen', mark: '\u0300', visual: 'ˋ', name: 'Huyền' }, { id: 'sac', mark: '\u0301', visual: 'ˊ', name: 'Sắc' }, { id: 'hoi', mark: '\u0309', visual: 'ˀ', name: 'Hỏi' }, { id: 'nga', mark: '\u0303', visual: '˜', name: 'Ngã' }, { id: 'nang', mark: '\u0323', visual: '•', name: 'Nặng' }];
 
     const QUIZZES = [
@@ -197,7 +242,7 @@
       { word: 'củ nghệ', display: 'ủ nghệ', missing: 'ngh', options: ['ngh', 'ng', 'gh'], emoji: '🥔' }
     ];
 
-    const state = { currentLesson: null, currentMode: null, mCIdx: 0, mVIdx: 0, mTIdx: 1, testData: { total: 5, current: 0, correct: 0 } };
+    const state = { currentGroup: null, currentMode: null, mCIdx: 0, mVIdx: 0, mTIdx: 1, testData: { total: 5, current: 0, correct: 0 } };
 
     // --- AUDIO SYSTEM ---
     let audioCtx = null;
@@ -217,7 +262,6 @@
       else if (type === 'wrong') { osc.type = 'sawtooth'; osc.frequency.setValueAtTime(200, audioCtx.currentTime); osc.frequency.linearRampToValueAtTime(150, audioCtx.currentTime + 0.2); gain.gain.setValueAtTime(0.1, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2); osc.start(); osc.stop(audioCtx.currentTime + 0.2); }
     }
 
-    // ĐIỀU CHỈNH TỐC ĐỘ ĐỌC NATIVE CHO iOS CHẬM LẠI
     function speakVietnamese(text, rate = 0.4) {
       if (!text) return;
       initAudio();
@@ -225,7 +269,7 @@
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(text);
         utter.lang = 'vi-VN';
-        utter.rate = rate; // Giữ nguyên tốc độ đọc chậm 0.6
+        utter.rate = rate; // Giữ nguyên tốc độ đọc chậm 0.4
         window.speechSynthesis.speak(utter);
       }
     }
@@ -240,7 +284,7 @@
       initAudio(); forceWakeUpTTS(); playSound('success');
       document.getElementById('welcome-view').classList.add('hidden');
       updateStars(); switchView('dashboard-view');
-      setTimeout(() => speakVietnamese(`Chào ${CHILD_NAME}! Hôm nay Gấu muốn học bài nào?`), 400);
+      setTimeout(() => speakVietnamese(`Chào ${CHILD_NAME}! Hôm nay Gấu muốn học nhóm chữ nào?`, 0.6), 400);
     }
 
     function switchView(viewId) {
@@ -257,28 +301,26 @@
 
     function buildMap() {
       const container = document.getElementById('zone-container'); container.innerHTML = '';
-      SYLLABUS.forEach(zone => {
-        const th = zone.theme;
-        const zoneDiv = document.createElement('div');
-        zoneDiv.className = `bg-white rounded-2xl border-4 ${th.border} shadow-sm overflow-hidden`;
-        let html = `<div class="${th.bg} ${th.text} font-black px-4 py-2 text-sm sm:text-base border-b-2 ${th.border}">${zone.zoneName}</div><div class="flex flex-col">`;
-        zone.lessons.forEach(lesson => {
-          html += `
-            <button onclick="openLessonModal(${zone.zoneId}, ${lesson.id})" class="btn-3d flex items-center gap-3 p-3 border-b border-slate-100 active:bg-slate-50 text-left">
-              <div class="w-10 h-10 rounded-xl ${th.btn} ${th.border} border-2 flex items-center justify-center text-lg shrink-0">📖</div>
-              <div class="font-black text-slate-700 text-sm sm:text-base">${lesson.title}</div>
-            </button>
-          `;
-        });
-        html += `</div>`; zoneDiv.innerHTML = html; container.appendChild(zoneDiv);
+      SYLLABUS.forEach(group => {
+        const th = group.theme;
+        const groupBtn = document.createElement('button');
+        groupBtn.onclick = () => openLessonModal(group.id);
+        groupBtn.className = `btn-3d w-full bg-white rounded-2xl border-4 ${th.border} shadow-sm overflow-hidden flex flex-col`;
+        groupBtn.innerHTML = `
+          <div class="${th.bg} ${th.text} font-black px-4 py-2 text-sm sm:text-base border-b-2 ${th.border} w-full text-left">${group.title}</div>
+          <div class="flex items-center gap-3 p-3 w-full text-left">
+            <div class="w-12 h-12 rounded-xl ${th.btn} ${th.border} border-2 flex items-center justify-center text-xl shrink-0">🗂️</div>
+            <div class="font-bold text-slate-500 text-sm sm:text-base truncate flex-1">Gồm: ${group.desc}</div>
+          </div>
+        `;
+        container.appendChild(groupBtn);
       });
     }
 
-    function openLessonModal(zoneId, lessonId) {
+    function openLessonModal(groupId) {
       playSound('pop');
-      const zone = SYLLABUS.find(z => z.zoneId === zoneId);
-      state.currentLesson = zone.lessons.find(l => l.id === lessonId);
-      document.getElementById('modal-lesson-title').textContent = state.currentLesson.title;
+      state.currentGroup = SYLLABUS.find(g => g.id === groupId);
+      document.getElementById('modal-lesson-title').textContent = state.currentGroup.title;
       document.getElementById('lesson-modal').classList.remove('hidden');
     }
     function closeLessonModal() { playSound('pop'); document.getElementById('lesson-modal').classList.add('hidden'); }
@@ -287,17 +329,17 @@
     function startMode(mode) {
       closeLessonModal(); state.currentMode = mode; switchView('game-view');
       const titleEl = document.getElementById('game-header-title'); const stage = document.getElementById('game-stage'); const bar = document.getElementById('test-progress-bar');
-      if (mode === 'learn') { titleEl.textContent = `🎓 Học: ${state.currentLesson.title}`; bar.classList.add('hidden'); renderLearnMode(stage); } 
+      if (mode === 'learn') { titleEl.textContent = `🎓 Học: ${state.currentGroup.title}`; bar.classList.add('hidden'); renderLearnMode(stage); } 
       else if (mode === 'review') { titleEl.textContent = `🔁 Ôn tập Ghép Vần`; bar.classList.add('hidden'); renderMachineMode(stage); } 
       else if (mode === 'test') { titleEl.textContent = `📝 Kiểm tra`; bar.classList.remove('hidden'); state.testData.current = 0; state.testData.correct = 0; renderTestMode(stage); }
     }
 
-    // 1. CHẾ ĐỘ HỌC LẬT THẺ (CHỮ KHỔNG LỒ)
+    // 1. CHẾ ĐỘ HỌC LẬT THẺ (GOM 5 BÀI)
     function renderLearnMode(stage) {
       stage.className = 'flex-1 board-3d p-3 flex flex-col relative overflow-hidden bg-amber-50';
-      let gridHTML = '<div class="text-center text-amber-700 font-black text-sm mb-3">Chạm vào thẻ để nghe đọc chữ nhé!</div><div class="flex-1 overflow-y-auto flex flex-wrap justify-center items-center gap-6 pb-4">';
+      let gridHTML = '<div class="text-center text-amber-700 font-black text-sm mb-3">Vuốt và chạm vào thẻ để nghe nhé!</div><div class="flex-1 overflow-y-auto flex flex-wrap justify-center items-center gap-6 pb-4">';
       
-      state.currentLesson.chars.forEach((item, idx) => {
+      state.currentGroup.chars.forEach((item, idx) => {
         const frontClass = item.t === 'vowel' ? 'vowel-front' : 'consonant-front';
         const fontSize = item.c.length > 2 ? 'text-5xl sm:text-6xl' : item.c.length > 1 ? 'text-7xl sm:text-[6rem]' : 'text-[6rem] sm:text-[10rem] leading-none';
         
@@ -323,12 +365,12 @@
       const card = document.getElementById(`card-${index}`);
       const isFlipped = card.classList.contains('flipped');
       document.querySelectorAll('.flip-card').forEach(c => c.classList.remove('flipped'));
-      if (!isFlipped) { card.classList.add('flipped'); speakVietnamese(`${phonics}. ${word}`, 0.6); }
+      if (!isFlipped) { card.classList.add('flipped'); speakVietnamese(`${phonics}. ${word}`, 0.4); }
     }
 
     // 2. MÁY GHÉP VẦN
     function getSpellingRule(c, v) {
-      const e_group = ['e','ê','i','ia'];
+      const e_group = ['e','ê','i','y','ia'];
       if (c === 'c' && e_group.includes(v)) return 'k'; if (c === 'g' && e_group.includes(v)) return 'gh'; if (c === 'ng' && e_group.includes(v)) return 'ngh';
       if (c === 'k' && !e_group.includes(v)) return 'c'; if (c === 'gh' && !e_group.includes(v)) return 'g'; if (c === 'ngh' && !e_group.includes(v)) return 'ng';
       return c;
@@ -364,7 +406,7 @@
               <button onclick="changeSlot('t', 1)" class="btn-3d bg-white border-2 border-slate-300 rounded-xl h-10 text-slate-500 font-black shadow-sm">▼</button>
             </div>
           </div>
-          <button onclick="playMachineResult()" class="btn-3d w-full mt-2 bg-amber-400 border-b-[6px] border-amber-600 text-amber-950 text-xl sm:text-2xl font-black py-3 sm:py-4 rounded-2xl shadow-lg">🪄 ĐÁNH VẦN</button>
+          <button onclick="playMachineResult()" class="btn-3d w-full mt-2 bg-amber-400 border-b-[6px] border-amber-600 text-amber-950 text-xl sm:text-2xl font-black py-3 sm:py-4 rounded-2xl shadow-lg">🪄 ĐÁNH VẦN NÀO</button>
         </div>
       `;
       updateSlotUI();
@@ -381,6 +423,7 @@
     function updateSlotUI() {
       let c = getSpellingRule(MAC_CONSONANTS[state.mCIdx], MAC_VOWELS[state.mVIdx]);
       document.getElementById('slot-c').textContent = c;
+      document.getElementById('slot-c').className = `text-sky-600 font-black flex items-center justify-center h-full transition-transform ${c.length > 2 ? 'text-3xl' : 'text-4xl sm:text-5xl'}`;
       document.getElementById('slot-v').textContent = MAC_VOWELS[state.mVIdx];
       document.getElementById('slot-t-visual').textContent = TONES[state.mTIdx].visual;
       document.getElementById('slot-t-name').textContent = TONES[state.mTIdx].name;
@@ -394,18 +437,19 @@
       let v = MAC_VOWELS[state.mVIdx]; let t = TONES[state.mTIdx];
       let c = getSpellingRule(MAC_CONSONANTS[state.mCIdx], v);
       
-      const sMap = {'b':'bờ','c':'cờ','k':'ca','d':'dờ','đ':'đờ','g':'gờ','gh':'gờ','h':'hờ','l':'lờ','m':'mờ','n':'nờ','v':'vờ','ch':'chờ','kh':'khờ','nh':'nhờ','th':'thờ','tr':'trờ','ph':'phờ','ng':'ngờ','ngh':'ngờ'};
+      const sMap = {'b':'bờ','c':'cờ','k':'ca','d':'dờ','đ':'đờ','g':'gờ','gh':'gờ','h':'hờ','l':'lờ','m':'mờ','n':'nờ','r':'rờ','s':'sờ','t':'tờ','v':'vờ','x':'sờ','ch':'chờ','kh':'khờ','nh':'nhờ','th':'thờ','tr':'trờ','ph':'phờ','ng':'ngờ','ngh':'ngờ'};
       const cSound = sMap[c] || c; const vSound = v.split('').join(' '); 
       const baseWord = (c + v).normalize('NFC'); const finalWord = (c + v + t.mark).normalize('NFC');
       
-      let spellString = t.id === 'ngang' ? `${cSound}, ${vSound}, ${baseWord}` : `${cSound}, ${vSound}, ${baseWord}, dấu ${t.name.toLowerCase()}, ${finalWord}`;
+      // Thêm nhiều dấu phẩy để ngắt quãng lâu hơn
+      let spellString = t.id === 'ngang' ? `${cSound},,, ${vSound},,, ${baseWord}` : `${cSound},,, ${vSound},,, ${baseWord},,, dấu ${t.name.toLowerCase()},,, ${finalWord}`;
       
       const btn = document.querySelector('#machine-view button[onclick="playMachineResult()"]');
       if(btn) btn.classList.add('scale-105', 'bg-amber-300');
       
-      window.speechSynthesis.cancel();
       if ('speechSynthesis' in window) {
-        const utter = new SpeechSynthesisUtterance(spellString); utter.lang = 'vi-VN'; utter.rate = 0.4; // Chậm khi đánh vần
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(spellString); utter.lang = 'vi-VN'; utter.rate = 0.35; // Cực chậm khi đánh vần
         utter.onend = () => { if(btn) btn.classList.remove('scale-105', 'bg-amber-300'); };
         window.speechSynthesis.speak(utter);
       }
@@ -428,7 +472,7 @@
           ${q.options.map(opt => `<button onclick="checkQuizAnswer('${opt}')" class="btn-3d flex-1 bg-white border-4 border-slate-200 border-b-[6px] text-slate-700 text-3xl sm:text-5xl font-black py-3 sm:py-4 rounded-2xl shadow hover:bg-slate-50">${opt}</button>`).join('')}
         </div>
       `;
-      setTimeout(() => speakVietnamese(q.word, 0.65), 500); 
+      setTimeout(() => speakVietnamese(q.word, 0.6), 500); 
     }
 
     window.checkQuizAnswer = function(selectedLetter) {
@@ -437,7 +481,7 @@
         const blank = document.getElementById('quiz-blank');
         blank.className = 'min-w-[4rem] px-2 h-20 sm:min-w-[6rem] sm:h-24 bg-emerald-500 border-4 border-emerald-600 rounded-2xl flex items-center justify-center text-4xl sm:text-6xl font-black text-white shadow-lg animate-pop';
         blank.textContent = selectedLetter;
-        speakVietnamese(`Đúng rồi! ${state.currentQuiz.word}`, 0.65);
+        speakVietnamese(`Đúng rồi! ${state.currentQuiz.word}`, 0.6);
         state.testData.correct++; stars++; localStorage.setItem('tv1_stars', stars); updateStars();
         setTimeout(() => {
           state.testData.current++;
@@ -445,7 +489,7 @@
           else showTestResult();
         }, 2000);
       } else {
-        playSound('wrong'); speakVietnamese(`Sai rồi, Gấu nhớ lại luật chính tả e, ê, i nhé!`, 0.65);
+        playSound('wrong'); speakVietnamese(`Sai rồi, Gấu nhớ lại luật chính tả e, ê, i nhé!`, 0.6);
         setTimeout(() => {
           state.testData.current++;
           if (state.testData.current < state.testData.total) renderTestMode(document.getElementById('game-stage'));
