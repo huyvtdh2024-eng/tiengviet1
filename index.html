@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Tiếng Việt Gấu" />
   <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3773/3773199.png" />
-  <title>Tiếng Việt Của Gấu </title>
+  <title>Tiếng Việt Của Gấu</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap');
@@ -53,7 +53,7 @@
     <div class="w-32 h-32 rounded-[2rem] bg-white border-4 border-amber-200 flex items-center justify-center text-6xl shadow-2xl mb-4 animate-float">📖</div>
     <span class="bg-white/20 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider mb-2">SGK Kết Nối Tri Thức</span>
     <h1 class="text-3xl sm:text-5xl font-black mb-2 drop-shadow-md">TIẾNG VIỆT LỚP 1</h1>
-    <p class="text-sm sm:text-lg font-bold text-orange-100 mb-8">Các bài học đã được gom nhóm cho Gấu dễ thao tác!</p>
+    <p class="text-sm sm:text-lg font-bold text-orange-100 mb-8">Học, Ôn tập và Kiểm tra theo từng cụm riêng biệt!</p>
     <button onclick="startAppWithAudio()" class="btn-3d bg-white border-b-[6px] border-slate-200 text-orange-600 font-black text-xl sm:text-2xl px-8 py-4 rounded-2xl shadow-xl flex items-center gap-2">
       <span>▶️ VÀO LỚP HỌC</span><span>🔊</span>
     </button>
@@ -107,10 +107,10 @@
           <span class="text-3xl sm:text-4xl">🎓</span><div class="min-w-0"><div class="font-black text-pink-600 text-base sm:text-lg">Học Nhóm Chữ</div><div class="text-[10px] sm:text-xs text-slate-500 font-bold truncate">Lật thẻ nghe đọc chữ</div></div>
         </button>
         <button onclick="startMode('review')" class="btn-3d bg-white border-4 border-sky-400 border-b-[6px] rounded-2xl p-3 sm:p-4 text-left flex gap-3 sm:gap-4 items-center shadow-sm">
-          <span class="text-3xl sm:text-4xl">🔁</span><div class="min-w-0"><div class="font-black text-sky-600 text-base sm:text-lg">Ôn Tập Ghép Vần</div><div class="text-[10px] sm:text-xs text-slate-500 font-bold truncate">Máy ghép vần thông minh</div></div>
+          <span class="text-3xl sm:text-4xl">🔁</span><div class="min-w-0"><div class="font-black text-sky-600 text-base sm:text-lg">Ôn Tập Ghép Vần</div><div class="text-[10px] sm:text-xs text-slate-500 font-bold truncate">Ghép các chữ đã học</div></div>
         </button>
         <button onclick="startMode('test')" class="btn-3d bg-white border-4 border-emerald-400 border-b-[6px] rounded-2xl p-3 sm:p-4 text-left flex gap-3 sm:gap-4 items-center shadow-sm">
-          <span class="text-3xl sm:text-4xl">📝</span><div class="min-w-0"><div class="font-black text-emerald-600 text-base sm:text-lg">Kiểm Tra Trắc Nghiệm</div><div class="text-[10px] sm:text-xs text-slate-500 font-bold truncate">Điền chữ lấy điểm Sao</div></div>
+          <span class="text-3xl sm:text-4xl">📝</span><div class="min-w-0"><div class="font-black text-emerald-600 text-base sm:text-lg">Kiểm Tra Trắc Nghiệm</div><div class="text-[10px] sm:text-xs text-slate-500 font-bold truncate">Trắc nghiệm kiến thức nhóm này</div></div>
         </button>
       </div>
     </div>
@@ -150,99 +150,114 @@
     const CHILD_NAME = 'Gấu';
     let stars = parseInt(localStorage.getItem('tv1_stars') || '0', 10);
     
-    // --- DATABASE ĐƯỢC GOM NHÓM (MỖI NHÓM 5 BÀI THEO SGK) ---
+    // --- DATABASE GOM NHÓM ĐỘC LẬP (HỌC-ÔN-KIỂM TRA CÙNG CHỮ) ---
     const SYLLABUS = [
       {
         id: 1, title: "Nhóm 1 (Tuần 1: Bài 1-5)", desc: "a, b, c, e, ê",
         theme: { bg: "bg-emerald-50", border: "border-emerald-400", text: "text-emerald-800", btn: "bg-emerald-100" },
         chars: [
-          {c:'a', sound:'a', word:'ca hát', emoji:'🎤', t:'vowel'},
-          {c:'b', sound:'bờ', word:'ba ba', emoji:'🐢', t:'con'},
-          {c:'c', sound:'cờ', word:'con cá', emoji:'🐟', t:'con'},
-          {c:'e', sound:'e', word:'em bé', emoji:'👶', t:'vowel'},
+          {c:'a', sound:'a', word:'ca hát', emoji:'🎤', t:'vowel'}, {c:'b', sound:'bờ', word:'ba ba', emoji:'🐢', t:'con'},
+          {c:'c', sound:'cờ', word:'con cá', emoji:'🐟', t:'con'}, {c:'e', sound:'e', word:'em bé', emoji:'👶', t:'vowel'},
           {c:'ê', sound:'ê', word:'bế bé', emoji:'🤱', t:'vowel'}
+        ],
+        macConsonants: ['b', 'c'], macVowels: ['a', 'e', 'ê'],
+        quizzes: [
+          { word: 'ba ba', display: 'a ba', missing: 'b', options: ['b', 'd', 'đ'], emoji: '🐢' },
+          { word: 'con cá', display: 'on cá', missing: 'c', options: ['c', 'e', 'a'], emoji: '🐟' },
+          { word: 'em bé', display: 'em _é', missing: 'b', options: ['b', 'c', 'ê'], emoji: '👶' }
         ]
       },
       {
         id: 2, title: "Nhóm 2 (Tuần 2: Bài 6-10)", desc: "o, ô, ơ, d, đ",
         theme: { bg: "bg-sky-50", border: "border-sky-400", text: "text-sky-800", btn: "bg-sky-100" },
         chars: [
-          {c:'o', sound:'o', word:'con bò', emoji:'🐄', t:'vowel'},
-          {c:'ô', sound:'ô', word:'ô tô', emoji:'🚗', t:'vowel'},
-          {c:'ơ', sound:'ơ', word:'cá cờ', emoji:'🐠', t:'vowel'},
-          {c:'d', sound:'dờ', word:'con dê', emoji:'🐐', t:'con'},
+          {c:'o', sound:'o', word:'con bò', emoji:'🐄', t:'vowel'}, {c:'ô', sound:'ô', word:'ô tô', emoji:'🚗', t:'vowel'},
+          {c:'ơ', sound:'ơ', word:'cá cờ', emoji:'🐠', t:'vowel'}, {c:'d', sound:'dờ', word:'con dê', emoji:'🐐', t:'con'},
           {c:'đ', sound:'đờ', word:'đi đò', emoji:'🛶', t:'con'}
+        ],
+        macConsonants: ['b', 'c', 'd', 'đ'], macVowels: ['a', 'o', 'ô', 'ơ'],
+        quizzes: [
+          { word: 'con bò', display: 'on bò', missing: 'c', options: ['c', 'b', 'đ'], emoji: '🐄' },
+          { word: 'đi đò', display: 'i đò', missing: 'đ', options: ['đ', 'd', 'b'], emoji: '🛶' },
+          { word: 'con dê', display: 'on dê', missing: 'd', options: ['d', 'đ', 'b'], emoji: '🐐' },
+          { word: 'cá cờ', display: 'á cờ', missing: 'c', options: ['c', 'b', 'd'], emoji: '🐠' }
         ]
       },
       {
         id: 3, title: "Nhóm 3 (Tuần 3: Bài 11-15)", desc: "i, k, h, l, u, ư, ch, kh",
         theme: { bg: "bg-amber-50", border: "border-amber-400", text: "text-amber-800", btn: "bg-amber-100" },
         chars: [
-          {c:'i', sound:'i', word:'viên bi', emoji:'🔵', t:'vowel'},
-          {c:'k', sound:'ca', word:'kì đà', emoji:'🦎', t:'con'},
-          {c:'h', sound:'hờ', word:'bờ hồ', emoji:'🏞️', t:'con'},
-          {c:'l', sound:'lờ', word:'le le', emoji:'🦆', t:'con'},
-          {c:'u', sound:'u', word:'đu đủ', emoji:'🍈', t:'vowel'},
-          {c:'ư', sound:'ư', word:'sư tử', emoji:'🦁', t:'vowel'},
-          {c:'ch', sound:'chờ', word:'chú khỉ', emoji:'🐒', t:'con'},
-          {c:'kh', sound:'khờ', word:'lá khô', emoji:'🍂', t:'con'}
+          {c:'i', sound:'i', word:'viên bi', emoji:'🔵', t:'vowel'}, {c:'k', sound:'ca', word:'kì đà', emoji:'🦎', t:'con'},
+          {c:'h', sound:'hờ', word:'bờ hồ', emoji:'🏞️', t:'con'}, {c:'l', sound:'lờ', word:'le le', emoji:'🦆', t:'con'},
+          {c:'u', sound:'u', word:'đu đủ', emoji:'🍈', t:'vowel'}, {c:'ư', sound:'ư', word:'sư tử', emoji:'🦁', t:'vowel'},
+          {c:'ch', sound:'chờ', word:'chú khỉ', emoji:'🐒', t:'con'}, {c:'kh', sound:'khờ', word:'lá khô', emoji:'🍂', t:'con'}
+        ],
+        macConsonants: ['c', 'k', 'h', 'l', 'ch', 'kh', 'b', 'd', 'đ'], macVowels: ['i', 'u', 'ư', 'a', 'o', 'ô', 'ơ', 'e', 'ê'],
+        quizzes: [
+          { word: 'kì đà', display: 'ì đà', missing: 'k', options: ['k', 'c', 'h'], emoji: '🦎' },
+          { word: 'lá khô', display: 'á khô', missing: 'l', options: ['l', 'h', 'kh'], emoji: '🍂' },
+          { word: 'chú khỉ', display: 'ú khỉ', missing: 'ch', options: ['ch', 'kh', 'h'], emoji: '🐒' },
+          { word: 'đu đủ', display: 'u đủ', missing: 'đ', options: ['đ', 'd', 'b'], emoji: '🍈' }
         ]
       },
       {
         id: 4, title: "Nhóm 4 (Tuần 4: Bài 16-20)", desc: "m, n, g, gi, gh, nh, ng, ngh",
         theme: { bg: "bg-pink-50", border: "border-pink-400", text: "text-pink-800", btn: "bg-pink-100" },
         chars: [
-          {c:'m', sound:'mờ', word:'cá mè', emoji:'🐟', t:'con'},
-          {c:'n', sound:'nờ', word:'nơ đỏ', emoji:'🎀', t:'con'},
-          {c:'g', sound:'gờ', word:'gà gô', emoji:'🐓', t:'con'},
-          {c:'gi', sound:'di', word:'giá đỗ', emoji:'🌱', t:'con'},
-          {c:'gh', sound:'gờ', word:'ghế đá', emoji:'🪑', t:'con'},
-          {c:'nh', sound:'nhờ', word:'nhà gỗ', emoji:'🏠', t:'con'},
-          {c:'ng', sound:'ngờ', word:'ngã ba', emoji:'🛣️', t:'con'},
-          {c:'ngh', sound:'ngờ', word:'củ nghệ', emoji:'🥔', t:'con'}
+          {c:'m', sound:'mờ', word:'cá mè', emoji:'🐟', t:'con'}, {c:'n', sound:'nờ', word:'nơ đỏ', emoji:'🎀', t:'con'},
+          {c:'g', sound:'gờ', word:'gà gô', emoji:'🐓', t:'con'}, {c:'gi', sound:'di', word:'giá đỗ', emoji:'🌱', t:'con'},
+          {c:'gh', sound:'gờ', word:'ghế đá', emoji:'🪑', t:'con'}, {c:'nh', sound:'nhờ', word:'nhà gỗ', emoji:'🏠', t:'con'},
+          {c:'ng', sound:'ngờ', word:'ngã ba', emoji:'🛣️', t:'con'}, {c:'ngh', sound:'ngờ', word:'củ nghệ', emoji:'🥔', t:'con'}
+        ],
+        macConsonants: ['m', 'n', 'g', 'gi', 'gh', 'nh', 'ng', 'ngh', 'c', 'k'], macVowels: ['a', 'e', 'ê', 'i', 'o', 'ô', 'ơ', 'u', 'ư'],
+        quizzes: [
+          { word: 'ghế đá', display: 'ế đá', missing: 'gh', options: ['gh', 'g', 'ngh'], emoji: '🪑' },
+          { word: 'gà gô', display: 'à gô', missing: 'g', options: ['g', 'gh', 'ng'], emoji: '🐓' },
+          { word: 'ngã ba', display: 'ã ba', missing: 'ng', options: ['ng', 'ngh', 'nh'], emoji: '🛣️' },
+          { word: 'củ nghệ', display: 'ủ nghệ', missing: 'ngh', options: ['ngh', 'ng', 'gh'], emoji: '🥔' },
+          { word: 'nhà gỗ', display: 'à gỗ', missing: 'nh', options: ['nh', 'm', 'n'], emoji: '🏠' }
         ]
       },
       {
         id: 5, title: "Nhóm 5 (Tuần 5: Bài 21-25)", desc: "r, s, t, tr, th, ia, ua, ưa",
         theme: { bg: "bg-purple-50", border: "border-purple-400", text: "text-purple-800", btn: "bg-purple-100" },
         chars: [
-          {c:'r', sound:'rờ', word:'rổ rá', emoji:'🧺', t:'con'},
-          {c:'s', sound:'sờ', word:'chữ số', emoji:'🔢', t:'con'},
-          {c:'t', sound:'tờ', word:'cái tủ', emoji:'🗄️', t:'con'},
-          {c:'tr', sound:'trờ', word:'cá trê', emoji:'🐟', t:'con'},
-          {c:'th', sound:'thờ', word:'cái thìa', emoji:'🥄', t:'con'},
-          {c:'ia', sound:'i a ia', word:'tía tô', emoji:'🌿', t:'vowel'},
-          {c:'ua', sound:'u a ua', word:'cà chua', emoji:'🍅', t:'vowel'},
-          {c:'ưa', sound:'ư a ưa', word:'dưa lê', emoji:'🍈', t:'vowel'}
+          {c:'r', sound:'rờ', word:'rổ rá', emoji:'🧺', t:'con'}, {c:'s', sound:'sờ', word:'chữ số', emoji:'🔢', t:'con'},
+          {c:'t', sound:'tờ', word:'cái tủ', emoji:'🗄️', t:'con'}, {c:'tr', sound:'trờ', word:'cá trê', emoji:'🐟', t:'con'},
+          {c:'th', sound:'thờ', word:'cái thìa', emoji:'🥄', t:'con'}, {c:'ia', sound:'i a ia', word:'tía tô', emoji:'🌿', t:'vowel'},
+          {c:'ua', sound:'u a ua', word:'cà chua', emoji:'🍅', t:'vowel'}, {c:'ưa', sound:'ư a ưa', word:'dưa lê', emoji:'🍈', t:'vowel'}
+        ],
+        macConsonants: ['r', 's', 't', 'tr', 'th', 'ch', 'kh', 'ph', 'nh'], macVowels: ['ia', 'ua', 'ưa', 'a', 'o', 'u', 'i'],
+        quizzes: [
+          { word: 'rổ rá', display: 'ổ rá', missing: 'r', options: ['r', 's', 'tr'], emoji: '🧺' },
+          { word: 'cá trê', display: 'á trê', missing: 'tr', options: ['tr', 'ch', 't'], emoji: '🐟' },
+          { word: 'cái thìa', display: 'ái thìa', missing: 'c', options: ['c', 't', 'th'], emoji: '🥄' },
+          { word: 'cà chua', display: 'à chua', missing: 'c', options: ['c', 'k', 'ch'], emoji: '🍅' },
+          { word: 'dưa lê', display: 'ưa lê', missing: 'd', options: ['d', 'đ', 'r'], emoji: '🍈' }
         ]
       },
       {
         id: 6, title: "Nhóm 6 (Tuần 6: Bài 26-30)", desc: "ph, qu, v, x, y, Ôn tập luật",
         theme: { bg: "bg-orange-50", border: "border-orange-400", text: "text-orange-800", btn: "bg-orange-100" },
         chars: [
-          {c:'ph', sound:'phờ', word:'phố cổ', emoji:'🏘️', t:'con'},
-          {c:'qu', sound:'quờ', word:'quả khế', emoji:'⭐', t:'con'},
-          {c:'v', sound:'vờ', word:'quyển vở', emoji:'📔', t:'con'},
-          {c:'x', sound:'sờ', word:'xe lu', emoji:'🚜', t:'con'},
+          {c:'ph', sound:'phờ', word:'phố cổ', emoji:'🏘️', t:'con'}, {c:'qu', sound:'quờ', word:'quả khế', emoji:'⭐', t:'con'},
+          {c:'v', sound:'vờ', word:'quyển vở', emoji:'📔', t:'con'}, {c:'x', sound:'sờ', word:'xe lu', emoji:'🚜', t:'con'},
           {c:'y', sound:'i', word:'y tá', emoji:'👩‍⚕️', t:'vowel'}
+        ],
+        macConsonants: ['ph', 'qu', 'v', 'x', 'r', 's', 't', 'tr'], macVowels: ['y', 'a', 'e', 'ê', 'i', 'ia', 'ua', 'ưa'],
+        quizzes: [
+          { word: 'phố cổ', display: 'ố cổ', missing: 'ph', options: ['ph', 'qu', 'v'], emoji: '🏘️' },
+          { word: 'quả khế', display: 'ả khế', missing: 'qu', options: ['qu', 'ph', 'v'], emoji: '⭐' },
+          { word: 'quyển vở', display: 'uyển vở', missing: 'qu', options: ['qu', 'v', 'x'], emoji: '📔' },
+          { word: 'xe lu', display: 'e lu', missing: 'x', options: ['x', 's', 'v'], emoji: '🚜' },
+          { word: 'y tá', display: ' tá', missing: 'y', options: ['y', 'i', 'v'], emoji: '👩‍⚕️' }
         ]
       }
     ];
 
-    const MAC_CONSONANTS = ['b','c','d','đ','g','h','k','l','m','n','r','s','t','v','x','ch','gh','kh','nh','ng','ngh','ph','qu','th','tr'];
-    const MAC_VOWELS = ['a','o','ô','ơ','u','ư','e','ê','i','y','ia','ua','ưa'];
     const TONES = [{ id: 'ngang', mark: '', visual: '—', name: 'Ngang' }, { id: 'huyen', mark: '\u0300', visual: 'ˋ', name: 'Huyền' }, { id: 'sac', mark: '\u0301', visual: 'ˊ', name: 'Sắc' }, { id: 'hoi', mark: '\u0309', visual: 'ˀ', name: 'Hỏi' }, { id: 'nga', mark: '\u0303', visual: '˜', name: 'Ngã' }, { id: 'nang', mark: '\u0323', visual: '•', name: 'Nặng' }];
 
-    const QUIZZES = [
-      { word: 'cá cờ', display: 'á cờ', missing: 'c', options: ['c', 'k', 'g'], emoji: '🐠' },
-      { word: 'kẻ ô', display: 'ẻ ô', missing: 'k', options: ['k', 'c', 'h'], emoji: '📏' },
-      { word: 'gà gô', display: 'à gô', missing: 'g', options: ['g', 'gh', 'ng'], emoji: '🐓' },
-      { word: 'ghế đá', display: 'ế đá', missing: 'gh', options: ['gh', 'g', 'nh'], emoji: '🪑' },
-      { word: 'ngã ba', display: 'ã ba', missing: 'ng', options: ['ng', 'ngh', 'nh'], emoji: '🛣️' },
-      { word: 'củ nghệ', display: 'ủ nghệ', missing: 'ngh', options: ['ngh', 'ng', 'gh'], emoji: '🥔' }
-    ];
-
-    const state = { currentGroup: null, currentMode: null, mCIdx: 0, mVIdx: 0, mTIdx: 1, testData: { total: 5, current: 0, correct: 0 } };
+    const state = { currentGroup: null, currentMode: null, mCIdx: 0, mVIdx: 0, mTIdx: 0, testData: { total: 5, current: 0, correct: 0 } };
 
     // --- AUDIO SYSTEM ---
     let audioCtx = null;
@@ -263,13 +278,10 @@
     }
 
     function speakVietnamese(text, rate = 0.4) {
-      if (!text) return;
-      initAudio();
+      if (!text) return; initAudio();
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(text);
-        utter.lang = 'vi-VN';
-        utter.rate = rate; // Giữ nguyên tốc độ đọc chậm 0.4
+        const utter = new SpeechSynthesisUtterance(text); utter.lang = 'vi-VN'; utter.rate = rate; 
         window.speechSynthesis.speak(utter);
       }
     }
@@ -291,10 +303,7 @@
       playSound('pop');
       ['dashboard-view', 'map-view', 'game-view'].forEach(id => {
         const el = document.getElementById(id);
-        if(el) {
-          if (id === viewId) { el.classList.remove('hidden'); el.classList.add('flex'); }
-          else { el.classList.add('hidden'); el.classList.remove('flex'); }
-        }
+        if(el) { if (id === viewId) { el.classList.remove('hidden'); el.classList.add('flex'); } else { el.classList.add('hidden'); el.classList.remove('flex'); } }
       });
       if(viewId === 'map-view') buildMap();
     }
@@ -302,8 +311,7 @@
     function buildMap() {
       const container = document.getElementById('zone-container'); container.innerHTML = '';
       SYLLABUS.forEach(group => {
-        const th = group.theme;
-        const groupBtn = document.createElement('button');
+        const th = group.theme; const groupBtn = document.createElement('button');
         groupBtn.onclick = () => openLessonModal(group.id);
         groupBtn.className = `btn-3d w-full bg-white rounded-2xl border-4 ${th.border} shadow-sm overflow-hidden flex flex-col`;
         groupBtn.innerHTML = `
@@ -334,15 +342,13 @@
       else if (mode === 'test') { titleEl.textContent = `📝 Kiểm tra`; bar.classList.remove('hidden'); state.testData.current = 0; state.testData.correct = 0; renderTestMode(stage); }
     }
 
-    // 1. CHẾ ĐỘ HỌC LẬT THẺ (GOM 5 BÀI)
+    // 1. CHẾ ĐỘ HỌC LẬT THẺ
     function renderLearnMode(stage) {
       stage.className = 'flex-1 board-3d p-3 flex flex-col relative overflow-hidden bg-amber-50';
       let gridHTML = '<div class="text-center text-amber-700 font-black text-sm mb-3">Vuốt và chạm vào thẻ để nghe nhé!</div><div class="flex-1 overflow-y-auto flex flex-wrap justify-center items-center gap-6 pb-4">';
-      
       state.currentGroup.chars.forEach((item, idx) => {
         const frontClass = item.t === 'vowel' ? 'vowel-front' : 'consonant-front';
         const fontSize = item.c.length > 2 ? 'text-5xl sm:text-6xl' : item.c.length > 1 ? 'text-7xl sm:text-[6rem]' : 'text-[6rem] sm:text-[10rem] leading-none';
-        
         gridHTML += `
           <div class="w-36 sm:w-56 aspect-[4/5] shrink-0">
             <div class="flip-card" id="card-${idx}" onclick="flipCard(${idx}, '${item.sound}', '${item.word}')">
@@ -361,14 +367,12 @@
     }
 
     window.flipCard = function(index, phonics, word) {
-      playSound('pop');
-      const card = document.getElementById(`card-${index}`);
-      const isFlipped = card.classList.contains('flipped');
+      playSound('pop'); const card = document.getElementById(`card-${index}`); const isFlipped = card.classList.contains('flipped');
       document.querySelectorAll('.flip-card').forEach(c => c.classList.remove('flipped'));
       if (!isFlipped) { card.classList.add('flipped'); speakVietnamese(`${phonics}. ${word}`, 0.4); }
     }
 
-    // 2. MÁY GHÉP VẦN
+    // 2. MÁY GHÉP VẦN (CHỈ DÙNG CHỮ TRONG NHÓM HIỆN TẠI)
     function getSpellingRule(c, v) {
       const e_group = ['e','ê','i','y','ia'];
       if (c === 'c' && e_group.includes(v)) return 'k'; if (c === 'g' && e_group.includes(v)) return 'gh'; if (c === 'ng' && e_group.includes(v)) return 'ngh';
@@ -377,6 +381,7 @@
     }
 
     function renderMachineMode(stage) {
+      state.mCIdx = 0; state.mVIdx = 0; state.mTIdx = 0; // Reset
       stage.className = 'flex-1 board-3d p-2 sm:p-4 flex flex-col relative overflow-y-auto bg-slate-50 justify-center';
       stage.innerHTML = `
         <div class="bg-gradient-to-b from-slate-100 to-slate-200 border-4 border-slate-300 rounded-3xl p-3 sm:p-5 flex flex-col gap-4 max-w-lg mx-auto w-full shadow-inner">
@@ -406,7 +411,7 @@
               <button onclick="changeSlot('t', 1)" class="btn-3d bg-white border-2 border-slate-300 rounded-xl h-10 text-slate-500 font-black shadow-sm">▼</button>
             </div>
           </div>
-          <button onclick="playMachineResult()" class="btn-3d w-full mt-2 bg-amber-400 border-b-[6px] border-amber-600 text-amber-950 text-xl sm:text-2xl font-black py-3 sm:py-4 rounded-2xl shadow-lg">🪄 ĐÁNH VẦN NÀO</button>
+          <button onclick="playMachineResult()" class="btn-3d w-full mt-2 bg-amber-400 border-b-[6px] border-amber-600 text-amber-950 text-xl sm:text-2xl font-black py-3 sm:py-4 rounded-2xl shadow-lg">🪄 ĐÁNH VẦN</button>
         </div>
       `;
       updateSlotUI();
@@ -414,34 +419,37 @@
 
     window.changeSlot = function(type, dir) {
       playSound('pop');
-      if (type === 'c') state.mCIdx = (state.mCIdx + dir + MAC_CONSONANTS.length) % MAC_CONSONANTS.length;
-      if (type === 'v') state.mVIdx = (state.mVIdx + dir + MAC_VOWELS.length) % MAC_VOWELS.length;
+      if (type === 'c') state.mCIdx = (state.mCIdx + dir + state.currentGroup.macConsonants.length) % state.currentGroup.macConsonants.length;
+      if (type === 'v') state.mVIdx = (state.mVIdx + dir + state.currentGroup.macVowels.length) % state.currentGroup.macVowels.length;
       if (type === 't') state.mTIdx = (state.mTIdx + dir + TONES.length) % TONES.length;
       updateSlotUI();
     }
 
     function updateSlotUI() {
-      let c = getSpellingRule(MAC_CONSONANTS[state.mCIdx], MAC_VOWELS[state.mVIdx]);
+      let cRaw = state.currentGroup.macConsonants[state.mCIdx];
+      let v = state.currentGroup.macVowels[state.mVIdx];
+      let c = getSpellingRule(cRaw, v);
+      
       document.getElementById('slot-c').textContent = c;
       document.getElementById('slot-c').className = `text-sky-600 font-black flex items-center justify-center h-full transition-transform ${c.length > 2 ? 'text-3xl' : 'text-4xl sm:text-5xl'}`;
-      document.getElementById('slot-v').textContent = MAC_VOWELS[state.mVIdx];
+      document.getElementById('slot-v').textContent = v;
       document.getElementById('slot-t-visual').textContent = TONES[state.mTIdx].visual;
       document.getElementById('slot-t-name').textContent = TONES[state.mTIdx].name;
       
       const res = document.getElementById('final-word');
-      res.textContent = (c + MAC_VOWELS[state.mVIdx] + TONES[state.mTIdx].mark).normalize('NFC');
+      res.textContent = (c + v + TONES[state.mTIdx].mark).normalize('NFC');
       res.classList.remove('animate-pop'); void res.offsetWidth; res.classList.add('animate-pop');
     }
 
     window.playMachineResult = function() {
-      let v = MAC_VOWELS[state.mVIdx]; let t = TONES[state.mTIdx];
-      let c = getSpellingRule(MAC_CONSONANTS[state.mCIdx], v);
+      let v = state.currentGroup.macVowels[state.mVIdx]; let t = TONES[state.mTIdx];
+      let cRaw = state.currentGroup.macConsonants[state.mCIdx];
+      let c = getSpellingRule(cRaw, v);
       
       const sMap = {'b':'bờ','c':'cờ','k':'ca','d':'dờ','đ':'đờ','g':'gờ','gh':'gờ','h':'hờ','l':'lờ','m':'mờ','n':'nờ','r':'rờ','s':'sờ','t':'tờ','v':'vờ','x':'sờ','ch':'chờ','kh':'khờ','nh':'nhờ','th':'thờ','tr':'trờ','ph':'phờ','ng':'ngờ','ngh':'ngờ'};
       const cSound = sMap[c] || c; const vSound = v.split('').join(' '); 
       const baseWord = (c + v).normalize('NFC'); const finalWord = (c + v + t.mark).normalize('NFC');
       
-      // Thêm nhiều dấu phẩy để ngắt quãng lâu hơn
       let spellString = t.id === 'ngang' ? `${cSound},,, ${vSound},,, ${baseWord}` : `${cSound},,, ${vSound},,, ${baseWord},,, dấu ${t.name.toLowerCase()},,, ${finalWord}`;
       
       const btn = document.querySelector('#machine-view button[onclick="playMachineResult()"]');
@@ -449,18 +457,19 @@
       
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(spellString); utter.lang = 'vi-VN'; utter.rate = 0.35; // Cực chậm khi đánh vần
+        const utter = new SpeechSynthesisUtterance(spellString); utter.lang = 'vi-VN'; utter.rate = 0.35; 
         utter.onend = () => { if(btn) btn.classList.remove('scale-105', 'bg-amber-300'); };
         window.speechSynthesis.speak(utter);
       }
     }
 
-    // 3. CHẾ ĐỘ KIỂM TRA (TRẮC NGHIỆM)
+    // 3. CHẾ ĐỘ KIỂM TRA (TRẮC NGHIỆM THEO NHÓM)
     function renderTestMode(stage) {
       stage.className = 'flex-1 board-3d p-4 flex flex-col justify-center items-center relative overflow-hidden bg-emerald-50';
       document.getElementById('test-progress-fill').style.width = ((state.testData.current)/state.testData.total)*100 + '%';
       
-      const q = QUIZZES[Math.floor(Math.random() * QUIZZES.length)]; state.currentQuiz = q;
+      const q = state.currentGroup.quizzes[Math.floor(Math.random() * state.currentGroup.quizzes.length)]; 
+      state.currentQuiz = q;
       
       stage.innerHTML = `
         <div class="text-7xl sm:text-8xl mb-6 animate-float">${q.emoji}</div>
@@ -489,7 +498,7 @@
           else showTestResult();
         }, 2000);
       } else {
-        playSound('wrong'); speakVietnamese(`Sai rồi, Gấu nhớ lại luật chính tả e, ê, i nhé!`, 0.6);
+        playSound('wrong'); speakVietnamese(`Sai rồi, Gấu chọn lại nhé!`, 0.6);
         setTimeout(() => {
           state.testData.current++;
           if (state.testData.current < state.testData.total) renderTestMode(document.getElementById('game-stage'));
